@@ -7,25 +7,37 @@ export default function Dashboard() {
     const listId = 1;
 
     const [fields, setFields] = useState([
-        { id: "1", name: "Name", position: 1 },
-        { id: "2", name: "Email", position: 2 },
-        { id: "3", name: "Occupation", position: 3 },
+        { id: 1, name: "Name", label: "name", position: 1 },
+        { id: 2, name: "Email", label: "email", position: 2 },
+        { id: 3, name: "Occupation", label: "occupation", position: 3 },
     ]);
     const [rows, setRows] = useState([
         {
             id: 1,
             listId: 1,
-            values: { "1": "Hissam", "2": "email@gmail.com", "3": "Developer" },
+            values: {
+                name: "Hissam",
+                email: "email@gmail.com",
+                occupation: "Developer",
+            },
         },
         {
             id: 2,
             listId: 1,
-            values: { "1": "Hissam", "2": "email@gmail.com", "3": "Developer" },
+            values: {
+                name: "Hissam",
+                email: "email@gmail.com",
+                occupation: "Developer",
+            },
         },
         {
             id: 3,
             listId: 1,
-            values: { "1": "Hissam", "2": "email@gmail.com", "3": "Developer" },
+            values: {
+                name: "Hissam",
+                email: "email@gmail.com",
+                occupation: "Developer",
+            },
         },
     ]);
     // Example data
@@ -47,7 +59,7 @@ export default function Dashboard() {
     };
 
     const handleColUpdate = (
-        fieldId: string,
+        fieldId: number,
         fieldName: string,
         value: string,
     ) => {
@@ -66,7 +78,7 @@ export default function Dashboard() {
     const createRow = () => {
         setRows((prev) => {
             const values = Object.fromEntries(
-                fields.map((field) => [field.id, ""]),
+                fields.map((field) => [field.label, ""]),
             );
 
             return [
@@ -148,11 +160,13 @@ export default function Dashboard() {
                                             onChange={(e) =>
                                                 handleUpdate(
                                                     row.id,
-                                                    field.id,
+                                                    field.label,
                                                     e.target.value,
                                                 )
                                             }
-                                            value={row.values[field.id] || ""}
+                                            value={
+                                                row.values[field.label] || ""
+                                            }
                                             className="py-2 px-8 w-full hover:bg-white/10"
                                         />
                                     </td>

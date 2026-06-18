@@ -5,7 +5,7 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../app/generated/prisma"
+  output   = "../src/app/generated/prisma"
 }
 
 datasource db {
@@ -17,6 +17,8 @@ model List {
   name String
   desc String?
   fields Field[]
+
+  @@map("lists")
 }
 
 model Field {
@@ -28,6 +30,8 @@ model Field {
   listId Int
   list List @relation(fields: [listId], references: [id])
   values Value[]
+
+  @@map("fields")
 }
 
 model Value {
@@ -35,4 +39,6 @@ model Value {
   data Json
   fieldId Int
   field Field @relation(fields: [fieldId], references: [id])
+
+  @@map("values")
 }
