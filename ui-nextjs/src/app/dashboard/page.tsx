@@ -114,7 +114,17 @@ export default function Dashboard() {
     return (
         <div className=" grid grid-cols-[20rem_1fr]">
             <aside className="px-8 py-12 sticky top-0 h-screen border-r border-r-white/25">
-                <span className="border-b border-b-white/25">Lists</span>
+                <div className="border-b border-b-white/25">
+                    <span className="flex gap-2">
+                        Lists
+                        <button className="h-fit w-fit">
+                            <PlusIcon
+                                size={18}
+                                className="bg-blue-700 rounded-sm hover:bg-blue-700/80 cursor-pointer"
+                            />
+                        </button>
+                    </span>
+                </div>
             </aside>
             <main className="mx-42 my-12">
                 <button
