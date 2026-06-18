@@ -1,5 +1,6 @@
 "use client";
 
+import { PlusIcon } from "lucide-react";
 import { useState } from "react";
 
 export default function Dashboard() {
@@ -45,6 +46,23 @@ export default function Dashboard() {
         );
     };
 
+    const handleColUpdate = (
+        fieldId: string,
+        fieldName: string,
+        value: string,
+    ) => {
+        setFields((prev) =>
+            prev.map((field) =>
+                field.id === fieldId
+                    ? {
+                          ...field,
+                          name: value,
+                      }
+                    : field,
+            ),
+        );
+    };
+
     const createRow = () => {
         setRows((prev) => {
             const values = Object.fromEntries(
@@ -62,17 +80,29 @@ export default function Dashboard() {
         });
     };
 
+    const createCol = () => {
+        setFields((prev) => {
+            const newField = {
+                id: (prev.length + 1).toString(),
+                name: "",
+                position: prev.length + 1,
+            };
+
+            return [...prev, newField];
+        });
+    };
+
     return (
         <div className=" grid grid-cols-[20rem_1fr]">
             <aside className="px-8 py-12 sticky top-0 h-screen border-r border-r-white/25">
                 <span className="border-b border-b-white/25">Lists</span>
             </aside>
-            <main className="mx-42 my-12 min-h-1239">
+            <main className="mx-42 my-12">
                 <button
                     onClick={createRow}
-                    className="px-3 py-1 cursor-pointer bg-white/20 hover:bg-white/10 active:bg-amber-300/20"
+                    className="px-3 py-1 flex items-center gap-2 cursor-pointer bg-white/20 hover:bg-white/10 active:bg-amber-300/20"
                 >
-                    Create Row
+                    <PlusIcon size={18} /> Row
                 </button>
                 <table>
                     <thead>
@@ -80,11 +110,30 @@ export default function Dashboard() {
                             {fields.map((field) => (
                                 <th
                                     key={field.id}
-                                    className="min-w-52 text-left px-8 py-1 border-l border-gray-700"
+                                    className="min-w-52 text-left border-l border-gray-700"
                                 >
-                                    {field.name}
+                                    <input
+                                        onChange={(e) =>
+                                            handleColUpdate(
+                                                field.id,
+                                                field.name,
+                                                e.target.value,
+                                            )
+                                        }
+                                        type="text"
+                                        value={field.name}
+                                        className="px-8 py-1 hover:bg-white/10"
+                                    />
                                 </th>
                             ))}
+                            <th>
+                                <button
+                                    onClick={createCol}
+                                    className="px-3 py-1 flex items-center gap-2 cursor-pointer bg-white/20 hover:bg-white/10 active:bg-amber-300/20"
+                                >
+                                    <PlusIcon size={18} /> Column
+                                </button>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -93,7 +142,7 @@ export default function Dashboard() {
                                 {fields.map((field) => (
                                     <td
                                         key={field.id}
-                                        className="min-w-52 text-left px-8 py-1 border border-gray-700"
+                                        className="min-w-52 text-left border border-gray-700"
                                     >
                                         <input
                                             onChange={(e) =>
@@ -104,6 +153,7 @@ export default function Dashboard() {
                                                 )
                                             }
                                             value={row.values[field.id] || ""}
+                                            className="py-2 px-8 w-full hover:bg-white/10"
                                         />
                                     </td>
                                 ))}

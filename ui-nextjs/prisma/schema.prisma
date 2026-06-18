@@ -14,22 +14,25 @@ datasource db {
 
 model List {
   id Int @id @default(autoincrement())
-  name String // e.g. Client List
-  fields ListField[]
+  name String
+  desc String?
+  fields Field[]
 }
 
-model ListField {
+model Field {
   id Int @id @default(autoincrement())
-  name String // e.g. Email, Website
-  type String // e.g. text, email, link, we will render based on it
+  name String
+  label String
+  position Int
+  type String?
   listId Int
   list List @relation(fields: [listId], references: [id])
-  values ListValue[]
+  values Value[]
 }
 
-model ListValue {
+model Value {
   id Int @id @default(autoincrement())
-  value String // e.g. email@example.com, url...
+  data Json
   fieldId Int
-  field ListField @relation(fields: [fieldId], references: [id])
+  field Field @relation(fields: [fieldId], references: [id])
 }
