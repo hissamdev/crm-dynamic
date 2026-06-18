@@ -3,6 +3,12 @@
 import { PlusIcon } from "lucide-react";
 import { useState } from "react";
 
+export type Row = {
+    id: number;
+    listId: number;
+    values: Record<string, string>;
+};
+
 export default function Dashboard() {
     const listId = 1;
 
@@ -11,7 +17,7 @@ export default function Dashboard() {
         { id: 2, name: "Email", label: "email", position: 2 },
         { id: 3, name: "Occupation", label: "occupation", position: 3 },
     ]);
-    const [rows, setRows] = useState([
+    const [rows, setRows] = useState<Row[]>([
         {
             id: 1,
             listId: 1,
@@ -42,7 +48,7 @@ export default function Dashboard() {
     ]);
     // Example data
 
-    const handleUpdate = (rowId: number, fieldId: string, value: string) => {
+    const handleUpdate = (rowId: number, label: string, value: string) => {
         setRows((prev) =>
             prev.map((row) =>
                 row.id === rowId
@@ -50,7 +56,7 @@ export default function Dashboard() {
                           ...row,
                           values: {
                               ...row.values,
-                              [fieldId]: value,
+                              [label]: value,
                           },
                       }
                     : row,
@@ -95,8 +101,9 @@ export default function Dashboard() {
     const createCol = () => {
         setFields((prev) => {
             const newField = {
-                id: (prev.length + 1).toString(),
+                id: prev.length + 1,
                 name: "",
+                label: "",
                 position: prev.length + 1,
             };
 
