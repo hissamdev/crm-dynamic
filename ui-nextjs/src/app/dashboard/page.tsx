@@ -2,140 +2,116 @@
 
 import { useState } from "react";
 
-type Field = {
-    id: string;
-    label: string;
-    position: number;
-};
+export default function Dashboard() {
+    const listId = 1;
 
-type Row = {
-    id: string;
-    values: Record<string, string>;
-};
-
-export default function CRMTable() {
-    // 🔧 pretend these came from DB
-    const [fields, setFields] = useState<Field[]>([
-        { id: "name", label: "Name", position: 0 },
-        { id: "email", label: "Email", position: 1 },
-        { id: "company", label: "Company", position: 2 },
+    const [fields, setFields] = useState([
+        { id: "1", name: "Name", position: 1 },
+        { id: "2", name: "Email", position: 2 },
+        { id: "3", name: "Occupation", position: 3 },
     ]);
-
-    const [rows, setRows] = useState<Row[]>([
+    const [rows, setRows] = useState([
         {
-            id: "1",
-            values: {
-                name: "Hissam",
-                email: "hissam@gmail.com",
-                company: "OpenAI",
-            },
+            id: 1,
+            listId: 1,
+            values: { "1": "Hissam", "2": "email@gmail.com", "3": "Developer" },
         },
         {
-            id: "2",
-            values: {
-                name: "Bob",
-                email: "bob@gmail.com",
-                company: "Google",
-            },
+            id: 2,
+            listId: 1,
+            values: { "1": "Hissam", "2": "email@gmail.com", "3": "Developer" },
+        },
+        {
+            id: 3,
+            listId: 1,
+            values: { "1": "Hissam", "2": "email@gmail.com", "3": "Developer" },
         },
     ]);
+    // Example data
 
-    // form state (new row being created)
-    const [draft, setDraft] = useState<Record<string, string>>({});
+    const handleUpdate = (rowId: number, fieldId: string, value: string) => {
+        setRows((prev) =>
+            prev.map((row) =>
+                row.id === rowId
+                    ? {
+                          ...row,
+                          values: {
+                              ...row.values,
+                              [fieldId]: value,
+                          },
+                      }
+                    : row,
+            ),
+        );
+    };
 
-    function addRow() {
-        setRows((prev) => [
-            ...prev,
-            {
-                id: crypto.randomUUID(),
-                values: draft,
-            },
-        ]);
+    const createRow = () => {
+        setRows((prev) => {
+            const values = Object.fromEntries(
+                fields.map((field) => [field.id, ""]),
+            );
 
-        setDraft({});
-    }
-
-    function moveFieldLeft(index: number) {
-        if (index === 0) return;
-
-        const copy = [...fields];
-        [copy[index - 1], copy[index]] = [copy[index], copy[index - 1]];
-
-        setFields(copy);
-    }
-
-    function moveFieldRight(index: number) {
-        if (index === fields.length - 1) return;
-
-        const copy = [...fields];
-        [copy[index], copy[index + 1]] = [copy[index + 1], copy[index]];
-
-        setFields(copy);
-    }
+            return [
+                {
+                    id: prev.length + 1,
+                    listId,
+                    values,
+                },
+                ...prev,
+            ];
+        });
+    };
 
     return (
-        <div className="p-4 space-y-6">
-            {/* 🧠 CREATE ROW FORM */}
-            <div className="border p-3 space-y-2">
-                <h2 className="font-bold">Add Row</h2>
-
-                {fields.map((field) => (
-                    <input
-                        key={field.id}
-                        placeholder={field.label}
-                        value={draft[field.id] || ""}
-                        onChange={(e) =>
-                            setDraft((prev) => ({
-                                ...prev,
-                                [field.id]: e.target.value,
-                            }))
-                        }
-                        className="border p-1 block w-full"
-                    />
-                ))}
-
+        <div className=" grid grid-cols-[20rem_1fr]">
+            <aside className="px-8 py-12 sticky top-0 h-screen border-r border-r-white/25">
+                <span className="border-b border-b-white/25">Lists</span>
+            </aside>
+            <main className="mx-42 my-12 min-h-1239">
                 <button
-                    onClick={addRow}
-                    className="bg-black text-white px-3 py-1"
+                    onClick={createRow}
+                    className="px-3 py-1 cursor-pointer bg-white/20 hover:bg-white/10 active:bg-amber-300/20"
                 >
-                    Save Row
+                    Create Row
                 </button>
-            </div>
-
-            {/* 📊 TABLE */}
-            <table className="border w-full">
-                <thead>
-                    <tr>
-                        {fields.map((field, i) => (
-                            <th key={field.id} className="border p-2">
-                                <div className="flex items-center gap-2 justify-center">
-                                    <span>{field.label}</span>
-
-                                    {/* fake column drag controls */}
-                                    <button onClick={() => moveFieldLeft(i)}>
-                                        ◀
-                                    </button>
-                                    <button onClick={() => moveFieldRight(i)}>
-                                        ▶
-                                    </button>
-                                </div>
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {rows.map((row) => (
-                        <tr key={row.id}>
+                <table>
+                    <thead>
+                        <tr className="border border-gray-700">
                             {fields.map((field) => (
-                                <td key={field.id} className="border p-2">
-                                    {row.values[field.id]}
-                                </td>
+                                <th
+                                    key={field.id}
+                                    className="min-w-52 text-left px-8 py-1 border-l border-gray-700"
+                                >
+                                    {field.name}
+                                </th>
                             ))}
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {rows.map((row) => (
+                            <tr key={row.id}>
+                                {fields.map((field) => (
+                                    <td
+                                        key={field.id}
+                                        className="min-w-52 text-left px-8 py-1 border border-gray-700"
+                                    >
+                                        <input
+                                            onChange={(e) =>
+                                                handleUpdate(
+                                                    row.id,
+                                                    field.id,
+                                                    e.target.value,
+                                                )
+                                            }
+                                            value={row.values[field.id] || ""}
+                                        />
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </main>
         </div>
     );
 }
