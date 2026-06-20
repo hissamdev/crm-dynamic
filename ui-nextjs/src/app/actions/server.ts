@@ -3,6 +3,7 @@
 import prisma from "@/src/lib/prisma";
 import { Field } from "../dashboard/create-list/page";
 import z from "zod";
+import { prepareFields } from "@/src/utils/functions/utility";
 
 export type List = {
     name: FormDataEntryValue | null;
@@ -49,13 +50,9 @@ export async function handleCreateList(fields: Field[], formData: FormData) {
         return;
     }
 
-    const preparedFields = fieldResult.data.map((field, idx) => ({
-        name: field.name,
-        emoji: field.emoji,
-        type: field.type,
-        label: field.name.toLocaleLowerCase(),
-        position: idx + 1,
-    }));
+    // Temporarily ignore until UI dummy data is removed
+    // @ts-ignore
+    const preparedFields = prepareFields(fieldResult.data);
 
     try {
         await prisma.list.create({
