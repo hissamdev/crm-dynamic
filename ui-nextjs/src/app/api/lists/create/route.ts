@@ -1,7 +1,7 @@
 import prisma from "@/src/lib/prisma";
 import { listSchema } from "@/src/utils/types/zodTypes";
 import { NextRequest, NextResponse } from "next/server";
-import z from "zod";
+import z, { success } from "zod";
 
 const readyFieldSchema = z.array(
     z.object({
@@ -32,22 +32,34 @@ export async function POST(req: NextRequest) {
         );
     }
 
-    // await prisma.list.create({
-    //     data: {
-    //         ...safeList.data,
-    //         fields: {
-    //             create: safeList.data.fields,
-    //         },
-    //     },
-    // });
+    try {
+        await prisma.list.create({
+            data: {
+                ...safeList.data,
+                fields: {
+                    create: safeList.data.fields,
+                },
+            },
+        });
 
-    console.log("Created list successfully");
-    return NextResponse.json(
-        {
-            success: true,
-            message: "Created list successfully",
-            data: safeList.data,
-        },
-        { status: 201 },
-    );
+        console.log("Created list successfully");
+        return NextResponse.json(
+            {
+                success: true,
+                message: "Created list successfully",
+                data: safeList.data,
+            },
+            { status: 201 },
+        );
+    } catch (err) {
+        console.error(err);
+        return NextResponse.json(
+            {
+                success: false,
+                message: "Something went wrong",
+                error: err,
+            },
+            { status: 500 },
+        );
+    }
 }

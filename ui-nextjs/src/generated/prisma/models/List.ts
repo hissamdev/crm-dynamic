@@ -20,64 +20,58 @@ export type ListModel = runtime.Types.Result.DefaultSelection<Prisma.$ListPayloa
 
 export type AggregateList = {
   _count: ListCountAggregateOutputType | null
-  _avg: ListAvgAggregateOutputType | null
-  _sum: ListSumAggregateOutputType | null
   _min: ListMinAggregateOutputType | null
   _max: ListMaxAggregateOutputType | null
 }
 
-export type ListAvgAggregateOutputType = {
-  id: number | null
-}
-
-export type ListSumAggregateOutputType = {
-  id: number | null
-}
-
 export type ListMinAggregateOutputType = {
-  id: number | null
+  id: string | null
   name: string | null
+  emoji: string | null
   desc: string | null
+  createdAt: Date | null
 }
 
 export type ListMaxAggregateOutputType = {
-  id: number | null
+  id: string | null
   name: string | null
+  emoji: string | null
   desc: string | null
+  createdAt: Date | null
 }
 
 export type ListCountAggregateOutputType = {
   id: number
   name: number
+  emoji: number
   desc: number
+  createdAt: number
   _all: number
 }
 
 
-export type ListAvgAggregateInputType = {
-  id?: true
-}
-
-export type ListSumAggregateInputType = {
-  id?: true
-}
-
 export type ListMinAggregateInputType = {
   id?: true
   name?: true
+  emoji?: true
   desc?: true
+  createdAt?: true
 }
 
 export type ListMaxAggregateInputType = {
   id?: true
   name?: true
+  emoji?: true
   desc?: true
+  createdAt?: true
 }
 
 export type ListCountAggregateInputType = {
   id?: true
   name?: true
+  emoji?: true
   desc?: true
+  createdAt?: true
   _all?: true
 }
 
@@ -119,18 +113,6 @@ export type ListAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: ListAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: ListSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: ListMinAggregateInputType
@@ -161,19 +143,17 @@ export type ListGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: ListCountAggregateInputType | true
-  _avg?: ListAvgAggregateInputType
-  _sum?: ListSumAggregateInputType
   _min?: ListMinAggregateInputType
   _max?: ListMaxAggregateInputType
 }
 
 export type ListGroupByOutputType = {
-  id: number
+  id: string
   name: string
+  emoji: string | null
   desc: string | null
+  createdAt: Date
   _count: ListCountAggregateOutputType | null
-  _avg: ListAvgAggregateOutputType | null
-  _sum: ListSumAggregateOutputType | null
   _min: ListMinAggregateOutputType | null
   _max: ListMaxAggregateOutputType | null
 }
@@ -197,116 +177,139 @@ export type ListWhereInput = {
   AND?: Prisma.ListWhereInput | Prisma.ListWhereInput[]
   OR?: Prisma.ListWhereInput[]
   NOT?: Prisma.ListWhereInput | Prisma.ListWhereInput[]
-  id?: Prisma.IntFilter<"List"> | number
+  id?: Prisma.StringFilter<"List"> | string
   name?: Prisma.StringFilter<"List"> | string
+  emoji?: Prisma.StringNullableFilter<"List"> | string | null
   desc?: Prisma.StringNullableFilter<"List"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"List"> | Date | string
   fields?: Prisma.FieldListRelationFilter
 }
 
 export type ListOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  emoji?: Prisma.SortOrderInput | Prisma.SortOrder
   desc?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   fields?: Prisma.FieldOrderByRelationAggregateInput
 }
 
 export type ListWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: string
   AND?: Prisma.ListWhereInput | Prisma.ListWhereInput[]
   OR?: Prisma.ListWhereInput[]
   NOT?: Prisma.ListWhereInput | Prisma.ListWhereInput[]
   name?: Prisma.StringFilter<"List"> | string
+  emoji?: Prisma.StringNullableFilter<"List"> | string | null
   desc?: Prisma.StringNullableFilter<"List"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"List"> | Date | string
   fields?: Prisma.FieldListRelationFilter
 }, "id">
 
 export type ListOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  emoji?: Prisma.SortOrderInput | Prisma.SortOrder
   desc?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   _count?: Prisma.ListCountOrderByAggregateInput
-  _avg?: Prisma.ListAvgOrderByAggregateInput
   _max?: Prisma.ListMaxOrderByAggregateInput
   _min?: Prisma.ListMinOrderByAggregateInput
-  _sum?: Prisma.ListSumOrderByAggregateInput
 }
 
 export type ListScalarWhereWithAggregatesInput = {
   AND?: Prisma.ListScalarWhereWithAggregatesInput | Prisma.ListScalarWhereWithAggregatesInput[]
   OR?: Prisma.ListScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ListScalarWhereWithAggregatesInput | Prisma.ListScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"List"> | number
+  id?: Prisma.StringWithAggregatesFilter<"List"> | string
   name?: Prisma.StringWithAggregatesFilter<"List"> | string
+  emoji?: Prisma.StringNullableWithAggregatesFilter<"List"> | string | null
   desc?: Prisma.StringNullableWithAggregatesFilter<"List"> | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"List"> | Date | string
 }
 
 export type ListCreateInput = {
+  id?: string
   name: string
+  emoji?: string | null
   desc?: string | null
+  createdAt?: Date | string
   fields?: Prisma.FieldCreateNestedManyWithoutListInput
 }
 
 export type ListUncheckedCreateInput = {
-  id?: number
+  id?: string
   name: string
+  emoji?: string | null
   desc?: string | null
+  createdAt?: Date | string
   fields?: Prisma.FieldUncheckedCreateNestedManyWithoutListInput
 }
 
 export type ListUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fields?: Prisma.FieldUpdateManyWithoutListNestedInput
 }
 
 export type ListUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fields?: Prisma.FieldUncheckedUpdateManyWithoutListNestedInput
 }
 
 export type ListCreateManyInput = {
-  id?: number
+  id?: string
   name: string
+  emoji?: string | null
   desc?: string | null
+  createdAt?: Date | string
 }
 
 export type ListUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ListUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ListCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  emoji?: Prisma.SortOrder
   desc?: Prisma.SortOrder
-}
-
-export type ListAvgOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type ListMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  emoji?: Prisma.SortOrder
   desc?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type ListMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  emoji?: Prisma.SortOrder
   desc?: Prisma.SortOrder
-}
-
-export type ListSumOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type ListScalarRelationFilter = {
@@ -322,12 +325,8 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
 export type ListCreateNestedOneWithoutFieldsInput = {
@@ -345,14 +344,19 @@ export type ListUpdateOneRequiredWithoutFieldsNestedInput = {
 }
 
 export type ListCreateWithoutFieldsInput = {
+  id?: string
   name: string
+  emoji?: string | null
   desc?: string | null
+  createdAt?: Date | string
 }
 
 export type ListUncheckedCreateWithoutFieldsInput = {
-  id?: number
+  id?: string
   name: string
+  emoji?: string | null
   desc?: string | null
+  createdAt?: Date | string
 }
 
 export type ListCreateOrConnectWithoutFieldsInput = {
@@ -372,14 +376,19 @@ export type ListUpdateToOneWithWhereWithoutFieldsInput = {
 }
 
 export type ListUpdateWithoutFieldsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ListUncheckedUpdateWithoutFieldsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -416,7 +425,9 @@ export type ListCountOutputTypeCountFieldsArgs<ExtArgs extends runtime.Types.Ext
 export type ListSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  emoji?: boolean
   desc?: boolean
+  createdAt?: boolean
   fields?: boolean | Prisma.List$fieldsArgs<ExtArgs>
   _count?: boolean | Prisma.ListCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["list"]>
@@ -424,22 +435,28 @@ export type ListSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type ListSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  emoji?: boolean
   desc?: boolean
+  createdAt?: boolean
 }, ExtArgs["result"]["list"]>
 
 export type ListSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  emoji?: boolean
   desc?: boolean
+  createdAt?: boolean
 }, ExtArgs["result"]["list"]>
 
 export type ListSelectScalar = {
   id?: boolean
   name?: boolean
+  emoji?: boolean
   desc?: boolean
+  createdAt?: boolean
 }
 
-export type ListOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "desc", ExtArgs["result"]["list"]>
+export type ListOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "emoji" | "desc" | "createdAt", ExtArgs["result"]["list"]>
 export type ListInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   fields?: boolean | Prisma.List$fieldsArgs<ExtArgs>
   _count?: boolean | Prisma.ListCountOutputTypeDefaultArgs<ExtArgs>
@@ -453,9 +470,11 @@ export type $ListPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     fields: Prisma.$FieldPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
+    id: string
     name: string
+    emoji: string | null
     desc: string | null
+    createdAt: Date
   }, ExtArgs["result"]["list"]>
   composites: {}
 }
@@ -880,9 +899,11 @@ export interface Prisma__ListClient<T, Null = never, ExtArgs extends runtime.Typ
  * Fields of the List model
  */
 export interface ListFieldRefs {
-  readonly id: Prisma.FieldRef<"List", 'Int'>
+  readonly id: Prisma.FieldRef<"List", 'String'>
   readonly name: Prisma.FieldRef<"List", 'String'>
+  readonly emoji: Prisma.FieldRef<"List", 'String'>
   readonly desc: Prisma.FieldRef<"List", 'String'>
+  readonly createdAt: Prisma.FieldRef<"List", 'DateTime'>
 }
     
 

@@ -29,39 +29,40 @@ export type AggregateField = {
 export type FieldAvgAggregateOutputType = {
   id: number | null
   position: number | null
-  listId: number | null
 }
 
 export type FieldSumAggregateOutputType = {
   id: number | null
   position: number | null
-  listId: number | null
 }
 
 export type FieldMinAggregateOutputType = {
   id: number | null
   name: string | null
+  emoji: string | null
+  type: string | null
   label: string | null
   position: number | null
-  type: string | null
-  listId: number | null
+  listId: string | null
 }
 
 export type FieldMaxAggregateOutputType = {
   id: number | null
   name: string | null
+  emoji: string | null
+  type: string | null
   label: string | null
   position: number | null
-  type: string | null
-  listId: number | null
+  listId: string | null
 }
 
 export type FieldCountAggregateOutputType = {
   id: number
   name: number
+  emoji: number
+  type: number
   label: number
   position: number
-  type: number
   listId: number
   _all: number
 }
@@ -70,39 +71,40 @@ export type FieldCountAggregateOutputType = {
 export type FieldAvgAggregateInputType = {
   id?: true
   position?: true
-  listId?: true
 }
 
 export type FieldSumAggregateInputType = {
   id?: true
   position?: true
-  listId?: true
 }
 
 export type FieldMinAggregateInputType = {
   id?: true
   name?: true
+  emoji?: true
+  type?: true
   label?: true
   position?: true
-  type?: true
   listId?: true
 }
 
 export type FieldMaxAggregateInputType = {
   id?: true
   name?: true
+  emoji?: true
+  type?: true
   label?: true
   position?: true
-  type?: true
   listId?: true
 }
 
 export type FieldCountAggregateInputType = {
   id?: true
   name?: true
+  emoji?: true
+  type?: true
   label?: true
   position?: true
-  type?: true
   listId?: true
   _all?: true
 }
@@ -196,10 +198,11 @@ export type FieldGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type FieldGroupByOutputType = {
   id: number
   name: string
+  emoji: string | null
+  type: string | null
   label: string
   position: number
-  type: string | null
-  listId: number
+  listId: string
   _count: FieldCountAggregateOutputType | null
   _avg: FieldAvgAggregateOutputType | null
   _sum: FieldSumAggregateOutputType | null
@@ -228,10 +231,11 @@ export type FieldWhereInput = {
   NOT?: Prisma.FieldWhereInput | Prisma.FieldWhereInput[]
   id?: Prisma.IntFilter<"Field"> | number
   name?: Prisma.StringFilter<"Field"> | string
+  emoji?: Prisma.StringNullableFilter<"Field"> | string | null
+  type?: Prisma.StringNullableFilter<"Field"> | string | null
   label?: Prisma.StringFilter<"Field"> | string
   position?: Prisma.IntFilter<"Field"> | number
-  type?: Prisma.StringNullableFilter<"Field"> | string | null
-  listId?: Prisma.IntFilter<"Field"> | number
+  listId?: Prisma.StringFilter<"Field"> | string
   list?: Prisma.XOR<Prisma.ListScalarRelationFilter, Prisma.ListWhereInput>
   values?: Prisma.ValueListRelationFilter
 }
@@ -239,9 +243,10 @@ export type FieldWhereInput = {
 export type FieldOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  emoji?: Prisma.SortOrderInput | Prisma.SortOrder
+  type?: Prisma.SortOrderInput | Prisma.SortOrder
   label?: Prisma.SortOrder
   position?: Prisma.SortOrder
-  type?: Prisma.SortOrderInput | Prisma.SortOrder
   listId?: Prisma.SortOrder
   list?: Prisma.ListOrderByWithRelationInput
   values?: Prisma.ValueOrderByRelationAggregateInput
@@ -253,10 +258,11 @@ export type FieldWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.FieldWhereInput[]
   NOT?: Prisma.FieldWhereInput | Prisma.FieldWhereInput[]
   name?: Prisma.StringFilter<"Field"> | string
+  emoji?: Prisma.StringNullableFilter<"Field"> | string | null
+  type?: Prisma.StringNullableFilter<"Field"> | string | null
   label?: Prisma.StringFilter<"Field"> | string
   position?: Prisma.IntFilter<"Field"> | number
-  type?: Prisma.StringNullableFilter<"Field"> | string | null
-  listId?: Prisma.IntFilter<"Field"> | number
+  listId?: Prisma.StringFilter<"Field"> | string
   list?: Prisma.XOR<Prisma.ListScalarRelationFilter, Prisma.ListWhereInput>
   values?: Prisma.ValueListRelationFilter
 }, "id">
@@ -264,9 +270,10 @@ export type FieldWhereUniqueInput = Prisma.AtLeast<{
 export type FieldOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  emoji?: Prisma.SortOrderInput | Prisma.SortOrder
+  type?: Prisma.SortOrderInput | Prisma.SortOrder
   label?: Prisma.SortOrder
   position?: Prisma.SortOrder
-  type?: Prisma.SortOrderInput | Prisma.SortOrder
   listId?: Prisma.SortOrder
   _count?: Prisma.FieldCountOrderByAggregateInput
   _avg?: Prisma.FieldAvgOrderByAggregateInput
@@ -281,17 +288,19 @@ export type FieldScalarWhereWithAggregatesInput = {
   NOT?: Prisma.FieldScalarWhereWithAggregatesInput | Prisma.FieldScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Field"> | number
   name?: Prisma.StringWithAggregatesFilter<"Field"> | string
+  emoji?: Prisma.StringNullableWithAggregatesFilter<"Field"> | string | null
+  type?: Prisma.StringNullableWithAggregatesFilter<"Field"> | string | null
   label?: Prisma.StringWithAggregatesFilter<"Field"> | string
   position?: Prisma.IntWithAggregatesFilter<"Field"> | number
-  type?: Prisma.StringNullableWithAggregatesFilter<"Field"> | string | null
-  listId?: Prisma.IntWithAggregatesFilter<"Field"> | number
+  listId?: Prisma.StringWithAggregatesFilter<"Field"> | string
 }
 
 export type FieldCreateInput = {
   name: string
+  emoji?: string | null
+  type?: string | null
   label: string
   position: number
-  type?: string | null
   list: Prisma.ListCreateNestedOneWithoutFieldsInput
   values?: Prisma.ValueCreateNestedManyWithoutFieldInput
 }
@@ -299,18 +308,20 @@ export type FieldCreateInput = {
 export type FieldUncheckedCreateInput = {
   id?: number
   name: string
+  emoji?: string | null
+  type?: string | null
   label: string
   position: number
-  type?: string | null
-  listId: number
+  listId: string
   values?: Prisma.ValueUncheckedCreateNestedManyWithoutFieldInput
 }
 
 export type FieldUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   label?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   list?: Prisma.ListUpdateOneRequiredWithoutFieldsNestedInput
   values?: Prisma.ValueUpdateManyWithoutFieldNestedInput
 }
@@ -318,36 +329,40 @@ export type FieldUpdateInput = {
 export type FieldUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   label?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  listId?: Prisma.IntFieldUpdateOperationsInput | number
+  listId?: Prisma.StringFieldUpdateOperationsInput | string
   values?: Prisma.ValueUncheckedUpdateManyWithoutFieldNestedInput
 }
 
 export type FieldCreateManyInput = {
   id?: number
   name: string
+  emoji?: string | null
+  type?: string | null
   label: string
   position: number
-  type?: string | null
-  listId: number
+  listId: string
 }
 
 export type FieldUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   label?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FieldUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   label?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  listId?: Prisma.IntFieldUpdateOperationsInput | number
+  listId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type FieldListRelationFilter = {
@@ -363,40 +378,41 @@ export type FieldOrderByRelationAggregateInput = {
 export type FieldCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  emoji?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   label?: Prisma.SortOrder
   position?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   listId?: Prisma.SortOrder
 }
 
 export type FieldAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   position?: Prisma.SortOrder
-  listId?: Prisma.SortOrder
 }
 
 export type FieldMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  emoji?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   label?: Prisma.SortOrder
   position?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   listId?: Prisma.SortOrder
 }
 
 export type FieldMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  emoji?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   label?: Prisma.SortOrder
   position?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   listId?: Prisma.SortOrder
 }
 
 export type FieldSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   position?: Prisma.SortOrder
-  listId?: Prisma.SortOrder
 }
 
 export type FieldScalarRelationFilter = {
@@ -446,6 +462,14 @@ export type FieldUncheckedUpdateManyWithoutListNestedInput = {
   deleteMany?: Prisma.FieldScalarWhereInput | Prisma.FieldScalarWhereInput[]
 }
 
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type FieldCreateNestedOneWithoutValuesInput = {
   create?: Prisma.XOR<Prisma.FieldCreateWithoutValuesInput, Prisma.FieldUncheckedCreateWithoutValuesInput>
   connectOrCreate?: Prisma.FieldCreateOrConnectWithoutValuesInput
@@ -462,18 +486,20 @@ export type FieldUpdateOneRequiredWithoutValuesNestedInput = {
 
 export type FieldCreateWithoutListInput = {
   name: string
+  emoji?: string | null
+  type?: string | null
   label: string
   position: number
-  type?: string | null
   values?: Prisma.ValueCreateNestedManyWithoutFieldInput
 }
 
 export type FieldUncheckedCreateWithoutListInput = {
   id?: number
   name: string
+  emoji?: string | null
+  type?: string | null
   label: string
   position: number
-  type?: string | null
   values?: Prisma.ValueUncheckedCreateNestedManyWithoutFieldInput
 }
 
@@ -509,27 +535,30 @@ export type FieldScalarWhereInput = {
   NOT?: Prisma.FieldScalarWhereInput | Prisma.FieldScalarWhereInput[]
   id?: Prisma.IntFilter<"Field"> | number
   name?: Prisma.StringFilter<"Field"> | string
+  emoji?: Prisma.StringNullableFilter<"Field"> | string | null
+  type?: Prisma.StringNullableFilter<"Field"> | string | null
   label?: Prisma.StringFilter<"Field"> | string
   position?: Prisma.IntFilter<"Field"> | number
-  type?: Prisma.StringNullableFilter<"Field"> | string | null
-  listId?: Prisma.IntFilter<"Field"> | number
+  listId?: Prisma.StringFilter<"Field"> | string
 }
 
 export type FieldCreateWithoutValuesInput = {
   name: string
+  emoji?: string | null
+  type?: string | null
   label: string
   position: number
-  type?: string | null
   list: Prisma.ListCreateNestedOneWithoutFieldsInput
 }
 
 export type FieldUncheckedCreateWithoutValuesInput = {
   id?: number
   name: string
+  emoji?: string | null
+  type?: string | null
   label: string
   position: number
-  type?: string | null
-  listId: number
+  listId: string
 }
 
 export type FieldCreateOrConnectWithoutValuesInput = {
@@ -550,52 +579,58 @@ export type FieldUpdateToOneWithWhereWithoutValuesInput = {
 
 export type FieldUpdateWithoutValuesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   label?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   list?: Prisma.ListUpdateOneRequiredWithoutFieldsNestedInput
 }
 
 export type FieldUncheckedUpdateWithoutValuesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   label?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  listId?: Prisma.IntFieldUpdateOperationsInput | number
+  listId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type FieldCreateManyListInput = {
   id?: number
   name: string
+  emoji?: string | null
+  type?: string | null
   label: string
   position: number
-  type?: string | null
 }
 
 export type FieldUpdateWithoutListInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   label?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   values?: Prisma.ValueUpdateManyWithoutFieldNestedInput
 }
 
 export type FieldUncheckedUpdateWithoutListInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   label?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   values?: Prisma.ValueUncheckedUpdateManyWithoutFieldNestedInput
 }
 
 export type FieldUncheckedUpdateManyWithoutListInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   label?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -632,9 +667,10 @@ export type FieldCountOutputTypeCountValuesArgs<ExtArgs extends runtime.Types.Ex
 export type FieldSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  emoji?: boolean
+  type?: boolean
   label?: boolean
   position?: boolean
-  type?: boolean
   listId?: boolean
   list?: boolean | Prisma.ListDefaultArgs<ExtArgs>
   values?: boolean | Prisma.Field$valuesArgs<ExtArgs>
@@ -644,9 +680,10 @@ export type FieldSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type FieldSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  emoji?: boolean
+  type?: boolean
   label?: boolean
   position?: boolean
-  type?: boolean
   listId?: boolean
   list?: boolean | Prisma.ListDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["field"]>
@@ -654,9 +691,10 @@ export type FieldSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type FieldSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  emoji?: boolean
+  type?: boolean
   label?: boolean
   position?: boolean
-  type?: boolean
   listId?: boolean
   list?: boolean | Prisma.ListDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["field"]>
@@ -664,13 +702,14 @@ export type FieldSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type FieldSelectScalar = {
   id?: boolean
   name?: boolean
+  emoji?: boolean
+  type?: boolean
   label?: boolean
   position?: boolean
-  type?: boolean
   listId?: boolean
 }
 
-export type FieldOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "label" | "position" | "type" | "listId", ExtArgs["result"]["field"]>
+export type FieldOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "emoji" | "type" | "label" | "position" | "listId", ExtArgs["result"]["field"]>
 export type FieldInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   list?: boolean | Prisma.ListDefaultArgs<ExtArgs>
   values?: boolean | Prisma.Field$valuesArgs<ExtArgs>
@@ -692,10 +731,11 @@ export type $FieldPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     name: string
+    emoji: string | null
+    type: string | null
     label: string
     position: number
-    type: string | null
-    listId: number
+    listId: string
   }, ExtArgs["result"]["field"]>
   composites: {}
 }
@@ -1123,10 +1163,11 @@ export interface Prisma__FieldClient<T, Null = never, ExtArgs extends runtime.Ty
 export interface FieldFieldRefs {
   readonly id: Prisma.FieldRef<"Field", 'Int'>
   readonly name: Prisma.FieldRef<"Field", 'String'>
+  readonly emoji: Prisma.FieldRef<"Field", 'String'>
+  readonly type: Prisma.FieldRef<"Field", 'String'>
   readonly label: Prisma.FieldRef<"Field", 'String'>
   readonly position: Prisma.FieldRef<"Field", 'Int'>
-  readonly type: Prisma.FieldRef<"Field", 'String'>
-  readonly listId: Prisma.FieldRef<"Field", 'Int'>
+  readonly listId: Prisma.FieldRef<"Field", 'String'>
 }
     
 

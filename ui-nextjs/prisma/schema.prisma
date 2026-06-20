@@ -13,9 +13,11 @@ datasource db {
 }
 
 model List {
-  id Int @id @default(autoincrement())
+  id String @id @default(uuid())
   name String
+  emoji String?
   desc String?
+  createdAt DateTime @default(now())
   fields Field[]
 
   @@map("lists")
@@ -24,10 +26,11 @@ model List {
 model Field {
   id Int @id @default(autoincrement())
   name String
+  emoji String?
+  type String?
   label String
   position Int
-  type String?
-  listId Int
+  listId String
   list List @relation(fields: [listId], references: [id])
   values Value[]
 

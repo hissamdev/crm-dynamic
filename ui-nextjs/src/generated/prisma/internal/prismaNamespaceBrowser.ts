@@ -75,7 +75,9 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const ListScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  desc: 'desc'
+  emoji: 'emoji',
+  desc: 'desc',
+  createdAt: 'createdAt'
 } as const
 
 export type ListScalarFieldEnum = (typeof ListScalarFieldEnum)[keyof typeof ListScalarFieldEnum]
@@ -84,9 +86,10 @@ export type ListScalarFieldEnum = (typeof ListScalarFieldEnum)[keyof typeof List
 export const FieldScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  emoji: 'emoji',
+  type: 'type',
   label: 'label',
   position: 'position',
-  type: 'type',
   listId: 'listId'
 } as const
 

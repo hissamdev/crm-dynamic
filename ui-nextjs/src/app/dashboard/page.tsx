@@ -1,7 +1,10 @@
 "use client";
 
+import { ApiList, List } from "@/src/utils/types/appTypes";
+import axios from "axios";
 import { PlusIcon } from "lucide-react";
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export type Row = {
     id: number;
@@ -11,42 +14,25 @@ export type Row = {
 
 export default function Dashboard() {
     const listId = 1;
-
+    const [lists, setLists] = useState<List[]>([]);
     const [fields, setFields] = useState([
         { id: 1, name: "Name", label: "name", position: 1 },
         { id: 2, name: "Email", label: "email", position: 2 },
         { id: 3, name: "Occupation", label: "occupation", position: 3 },
     ]);
-    const [rows, setRows] = useState<Row[]>([
-        {
-            id: 1,
-            listId: 1,
-            values: {
-                name: "Hissam",
-                email: "email@gmail.com",
-                occupation: "Developer",
-            },
-        },
-        {
-            id: 2,
-            listId: 1,
-            values: {
-                name: "Hissam",
-                email: "email@gmail.com",
-                occupation: "Developer",
-            },
-        },
-        {
-            id: 3,
-            listId: 1,
-            values: {
-                name: "Hissam",
-                email: "email@gmail.com",
-                occupation: "Developer",
-            },
-        },
-    ]);
+    const [rows, setRows] = useState<Row[]>([]);
     // Example data
+    useEffect(() => {
+        const load = async () => {
+            const res: ApiList = await axios.get(
+                `http://localhost:3000/api/lists`,
+            );
+            console.log("Data", JSON.stringify(res.data, null, 2));
+            setLists(res.data);
+        };
+
+        load();
+    }, []);
 
     const handleUpdate = (rowId: number, label: string, value: string) => {
         setRows((prev) =>
@@ -124,6 +110,19 @@ export default function Dashboard() {
                             />
                         </button>
                     </span>
+                </div>
+                <div>
+                    {!lists || lists.length === 0 ? (
+                        <div></div>
+                    ) : lists.length > 0 ? (
+                        lists.map((list) => (
+                            <Link key={list.id} href="/">
+                                {list.name}
+                            </Link>
+                        ))
+                    ) : (
+                        <div>Nothing</div>
+                    )}
                 </div>
             </aside>
             <main className="mx-42 my-12">
