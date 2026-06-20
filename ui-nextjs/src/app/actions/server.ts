@@ -1,35 +1,8 @@
 "use server";
-
-import prisma from "@/src/lib/prisma";
 import { Field } from "../dashboard/create-list/page";
-import z from "zod";
 import { prepareFields } from "@/src/utils/functions/utility";
-
-export type List = {
-    name: FormDataEntryValue | null;
-    emoji: FormDataEntryValue | null;
-    desc: FormDataEntryValue | null;
-};
-
-const listSchema = z.object({
-    name: z
-        .string()
-        .min(2, "List name should be at least 2 characters")
-        .max(120, "List name is too long"),
-    emoji: z.string().max(20, "Emoji is too long"),
-    desc: z.string().min(2, "List description should be at least 2 characters"),
-});
-
-const fieldSchema = z.array(
-    z.object({
-        name: z
-            .string()
-            .min(1, "Field name should be at least 1 character")
-            .max(250, "Field name should be within 250 characters"),
-        emoji: z.string().max(20, "Emoji is too long"),
-        type: z.string().max(40, "Type is too long"),
-    }),
-);
+import axios, { isAxiosError } from "axios";
+import { fieldSchema, listSchema } from "@/src/utils/types/zodTypes";
 
 export async function handleCreateList(fields: Field[], formData: FormData) {
     const listInfo = {
@@ -39,32 +12,35 @@ export async function handleCreateList(fields: Field[], formData: FormData) {
     };
 
     // Validation
-    const listResult = listSchema.safeParse(listInfo);
-    if (!listResult.success) {
-        console.error(listResult.error.issues);
+    const safeList = listSchema.safeParse(listInfo);
+    if (!safeList.success) {
+        console.error(safeList.error.issues);
         return;
     }
-    const fieldResult = fieldSchema.safeParse(fields);
-    if (!fieldResult.success) {
-        console.error(fieldResult.error.issues);
+    const safeField = fieldSchema.safeParse(fields);
+    if (!safeField.success) {
+        console.error(safeField.error.issues);
         return;
     }
 
     // Temporarily ignore until UI dummy data is removed
     // @ts-ignore
-    const preparedFields = prepareFields(fieldResult.data);
+    const readyFields = prepareFields(safeField.data);
+
+    const listWithFields = {
+        ...safeList.data,
+        fields: readyFields,
+    };
 
     try {
-        await prisma.list.create({
-            data: {
-                name: listResult.data.name,
-                desc: listResult.data.desc,
-                fields: {
-                    create: preparedFields,
-                },
-            },
+        await axios.post(`${process.env.API_URL}/api/lists/create`, {
+            listWithFields,
         });
-    } catch (e) {
-        console.error("Failed to create list:", e);
+    } catch (err) {
+        if (isAxiosError(err)) {
+            console.error(err.response?.status);
+            console.error(err.response?.data);
+        }
+        console.error("Failed to create list:", err);
     }
 }
