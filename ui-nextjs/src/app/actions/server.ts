@@ -1,5 +1,6 @@
 "use server";
 
+import prisma from "@/src/lib/prisma";
 import { Field } from "../dashboard/create-list/page";
 
 export type List = {
