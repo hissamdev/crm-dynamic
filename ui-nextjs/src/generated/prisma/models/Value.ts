@@ -28,56 +28,58 @@ export type AggregateValue = {
 
 export type ValueAvgAggregateOutputType = {
   id: number | null
-  fieldId: number | null
 }
 
 export type ValueSumAggregateOutputType = {
   id: number | null
-  fieldId: number | null
 }
 
 export type ValueMinAggregateOutputType = {
   id: number | null
-  fieldId: number | null
+  createdAt: Date | null
+  listId: string | null
 }
 
 export type ValueMaxAggregateOutputType = {
   id: number | null
-  fieldId: number | null
+  createdAt: Date | null
+  listId: string | null
 }
 
 export type ValueCountAggregateOutputType = {
   id: number
   data: number
-  fieldId: number
+  createdAt: number
+  listId: number
   _all: number
 }
 
 
 export type ValueAvgAggregateInputType = {
   id?: true
-  fieldId?: true
 }
 
 export type ValueSumAggregateInputType = {
   id?: true
-  fieldId?: true
 }
 
 export type ValueMinAggregateInputType = {
   id?: true
-  fieldId?: true
+  createdAt?: true
+  listId?: true
 }
 
 export type ValueMaxAggregateInputType = {
   id?: true
-  fieldId?: true
+  createdAt?: true
+  listId?: true
 }
 
 export type ValueCountAggregateInputType = {
   id?: true
   data?: true
-  fieldId?: true
+  createdAt?: true
+  listId?: true
   _all?: true
 }
 
@@ -170,7 +172,8 @@ export type ValueGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type ValueGroupByOutputType = {
   id: number
   data: runtime.JsonValue
-  fieldId: number
+  createdAt: Date
+  listId: string
   _count: ValueCountAggregateOutputType | null
   _avg: ValueAvgAggregateOutputType | null
   _sum: ValueSumAggregateOutputType | null
@@ -199,15 +202,17 @@ export type ValueWhereInput = {
   NOT?: Prisma.ValueWhereInput | Prisma.ValueWhereInput[]
   id?: Prisma.IntFilter<"Value"> | number
   data?: Prisma.JsonFilter<"Value">
-  fieldId?: Prisma.IntFilter<"Value"> | number
-  field?: Prisma.XOR<Prisma.FieldScalarRelationFilter, Prisma.FieldWhereInput>
+  createdAt?: Prisma.DateTimeFilter<"Value"> | Date | string
+  listId?: Prisma.StringFilter<"Value"> | string
+  list?: Prisma.XOR<Prisma.ListScalarRelationFilter, Prisma.ListWhereInput>
 }
 
 export type ValueOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   data?: Prisma.SortOrder
-  fieldId?: Prisma.SortOrder
-  field?: Prisma.FieldOrderByWithRelationInput
+  createdAt?: Prisma.SortOrder
+  listId?: Prisma.SortOrder
+  list?: Prisma.ListOrderByWithRelationInput
 }
 
 export type ValueWhereUniqueInput = Prisma.AtLeast<{
@@ -216,14 +221,16 @@ export type ValueWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ValueWhereInput[]
   NOT?: Prisma.ValueWhereInput | Prisma.ValueWhereInput[]
   data?: Prisma.JsonFilter<"Value">
-  fieldId?: Prisma.IntFilter<"Value"> | number
-  field?: Prisma.XOR<Prisma.FieldScalarRelationFilter, Prisma.FieldWhereInput>
+  createdAt?: Prisma.DateTimeFilter<"Value"> | Date | string
+  listId?: Prisma.StringFilter<"Value"> | string
+  list?: Prisma.XOR<Prisma.ListScalarRelationFilter, Prisma.ListWhereInput>
 }, "id">
 
 export type ValueOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   data?: Prisma.SortOrder
-  fieldId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  listId?: Prisma.SortOrder
   _count?: Prisma.ValueCountOrderByAggregateInput
   _avg?: Prisma.ValueAvgOrderByAggregateInput
   _max?: Prisma.ValueMaxOrderByAggregateInput
@@ -237,45 +244,53 @@ export type ValueScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ValueScalarWhereWithAggregatesInput | Prisma.ValueScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Value"> | number
   data?: Prisma.JsonWithAggregatesFilter<"Value">
-  fieldId?: Prisma.IntWithAggregatesFilter<"Value"> | number
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Value"> | Date | string
+  listId?: Prisma.StringWithAggregatesFilter<"Value"> | string
 }
 
 export type ValueCreateInput = {
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  field: Prisma.FieldCreateNestedOneWithoutValuesInput
+  createdAt?: Date | string
+  list: Prisma.ListCreateNestedOneWithoutValuesInput
 }
 
 export type ValueUncheckedCreateInput = {
   id?: number
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  fieldId: number
+  createdAt?: Date | string
+  listId: string
 }
 
 export type ValueUpdateInput = {
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  field?: Prisma.FieldUpdateOneRequiredWithoutValuesNestedInput
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  list?: Prisma.ListUpdateOneRequiredWithoutValuesNestedInput
 }
 
 export type ValueUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  fieldId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  listId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ValueCreateManyInput = {
   id?: number
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  fieldId: number
+  createdAt?: Date | string
+  listId: string
 }
 
 export type ValueUpdateManyMutationInput = {
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ValueUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  fieldId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  listId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ValueListRelationFilter = {
@@ -291,104 +306,107 @@ export type ValueOrderByRelationAggregateInput = {
 export type ValueCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   data?: Prisma.SortOrder
-  fieldId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  listId?: Prisma.SortOrder
 }
 
 export type ValueAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  fieldId?: Prisma.SortOrder
 }
 
 export type ValueMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  fieldId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  listId?: Prisma.SortOrder
 }
 
 export type ValueMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  fieldId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  listId?: Prisma.SortOrder
 }
 
 export type ValueSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  fieldId?: Prisma.SortOrder
 }
 
-export type ValueCreateNestedManyWithoutFieldInput = {
-  create?: Prisma.XOR<Prisma.ValueCreateWithoutFieldInput, Prisma.ValueUncheckedCreateWithoutFieldInput> | Prisma.ValueCreateWithoutFieldInput[] | Prisma.ValueUncheckedCreateWithoutFieldInput[]
-  connectOrCreate?: Prisma.ValueCreateOrConnectWithoutFieldInput | Prisma.ValueCreateOrConnectWithoutFieldInput[]
-  createMany?: Prisma.ValueCreateManyFieldInputEnvelope
+export type ValueCreateNestedManyWithoutListInput = {
+  create?: Prisma.XOR<Prisma.ValueCreateWithoutListInput, Prisma.ValueUncheckedCreateWithoutListInput> | Prisma.ValueCreateWithoutListInput[] | Prisma.ValueUncheckedCreateWithoutListInput[]
+  connectOrCreate?: Prisma.ValueCreateOrConnectWithoutListInput | Prisma.ValueCreateOrConnectWithoutListInput[]
+  createMany?: Prisma.ValueCreateManyListInputEnvelope
   connect?: Prisma.ValueWhereUniqueInput | Prisma.ValueWhereUniqueInput[]
 }
 
-export type ValueUncheckedCreateNestedManyWithoutFieldInput = {
-  create?: Prisma.XOR<Prisma.ValueCreateWithoutFieldInput, Prisma.ValueUncheckedCreateWithoutFieldInput> | Prisma.ValueCreateWithoutFieldInput[] | Prisma.ValueUncheckedCreateWithoutFieldInput[]
-  connectOrCreate?: Prisma.ValueCreateOrConnectWithoutFieldInput | Prisma.ValueCreateOrConnectWithoutFieldInput[]
-  createMany?: Prisma.ValueCreateManyFieldInputEnvelope
+export type ValueUncheckedCreateNestedManyWithoutListInput = {
+  create?: Prisma.XOR<Prisma.ValueCreateWithoutListInput, Prisma.ValueUncheckedCreateWithoutListInput> | Prisma.ValueCreateWithoutListInput[] | Prisma.ValueUncheckedCreateWithoutListInput[]
+  connectOrCreate?: Prisma.ValueCreateOrConnectWithoutListInput | Prisma.ValueCreateOrConnectWithoutListInput[]
+  createMany?: Prisma.ValueCreateManyListInputEnvelope
   connect?: Prisma.ValueWhereUniqueInput | Prisma.ValueWhereUniqueInput[]
 }
 
-export type ValueUpdateManyWithoutFieldNestedInput = {
-  create?: Prisma.XOR<Prisma.ValueCreateWithoutFieldInput, Prisma.ValueUncheckedCreateWithoutFieldInput> | Prisma.ValueCreateWithoutFieldInput[] | Prisma.ValueUncheckedCreateWithoutFieldInput[]
-  connectOrCreate?: Prisma.ValueCreateOrConnectWithoutFieldInput | Prisma.ValueCreateOrConnectWithoutFieldInput[]
-  upsert?: Prisma.ValueUpsertWithWhereUniqueWithoutFieldInput | Prisma.ValueUpsertWithWhereUniqueWithoutFieldInput[]
-  createMany?: Prisma.ValueCreateManyFieldInputEnvelope
+export type ValueUpdateManyWithoutListNestedInput = {
+  create?: Prisma.XOR<Prisma.ValueCreateWithoutListInput, Prisma.ValueUncheckedCreateWithoutListInput> | Prisma.ValueCreateWithoutListInput[] | Prisma.ValueUncheckedCreateWithoutListInput[]
+  connectOrCreate?: Prisma.ValueCreateOrConnectWithoutListInput | Prisma.ValueCreateOrConnectWithoutListInput[]
+  upsert?: Prisma.ValueUpsertWithWhereUniqueWithoutListInput | Prisma.ValueUpsertWithWhereUniqueWithoutListInput[]
+  createMany?: Prisma.ValueCreateManyListInputEnvelope
   set?: Prisma.ValueWhereUniqueInput | Prisma.ValueWhereUniqueInput[]
   disconnect?: Prisma.ValueWhereUniqueInput | Prisma.ValueWhereUniqueInput[]
   delete?: Prisma.ValueWhereUniqueInput | Prisma.ValueWhereUniqueInput[]
   connect?: Prisma.ValueWhereUniqueInput | Prisma.ValueWhereUniqueInput[]
-  update?: Prisma.ValueUpdateWithWhereUniqueWithoutFieldInput | Prisma.ValueUpdateWithWhereUniqueWithoutFieldInput[]
-  updateMany?: Prisma.ValueUpdateManyWithWhereWithoutFieldInput | Prisma.ValueUpdateManyWithWhereWithoutFieldInput[]
+  update?: Prisma.ValueUpdateWithWhereUniqueWithoutListInput | Prisma.ValueUpdateWithWhereUniqueWithoutListInput[]
+  updateMany?: Prisma.ValueUpdateManyWithWhereWithoutListInput | Prisma.ValueUpdateManyWithWhereWithoutListInput[]
   deleteMany?: Prisma.ValueScalarWhereInput | Prisma.ValueScalarWhereInput[]
 }
 
-export type ValueUncheckedUpdateManyWithoutFieldNestedInput = {
-  create?: Prisma.XOR<Prisma.ValueCreateWithoutFieldInput, Prisma.ValueUncheckedCreateWithoutFieldInput> | Prisma.ValueCreateWithoutFieldInput[] | Prisma.ValueUncheckedCreateWithoutFieldInput[]
-  connectOrCreate?: Prisma.ValueCreateOrConnectWithoutFieldInput | Prisma.ValueCreateOrConnectWithoutFieldInput[]
-  upsert?: Prisma.ValueUpsertWithWhereUniqueWithoutFieldInput | Prisma.ValueUpsertWithWhereUniqueWithoutFieldInput[]
-  createMany?: Prisma.ValueCreateManyFieldInputEnvelope
+export type ValueUncheckedUpdateManyWithoutListNestedInput = {
+  create?: Prisma.XOR<Prisma.ValueCreateWithoutListInput, Prisma.ValueUncheckedCreateWithoutListInput> | Prisma.ValueCreateWithoutListInput[] | Prisma.ValueUncheckedCreateWithoutListInput[]
+  connectOrCreate?: Prisma.ValueCreateOrConnectWithoutListInput | Prisma.ValueCreateOrConnectWithoutListInput[]
+  upsert?: Prisma.ValueUpsertWithWhereUniqueWithoutListInput | Prisma.ValueUpsertWithWhereUniqueWithoutListInput[]
+  createMany?: Prisma.ValueCreateManyListInputEnvelope
   set?: Prisma.ValueWhereUniqueInput | Prisma.ValueWhereUniqueInput[]
   disconnect?: Prisma.ValueWhereUniqueInput | Prisma.ValueWhereUniqueInput[]
   delete?: Prisma.ValueWhereUniqueInput | Prisma.ValueWhereUniqueInput[]
   connect?: Prisma.ValueWhereUniqueInput | Prisma.ValueWhereUniqueInput[]
-  update?: Prisma.ValueUpdateWithWhereUniqueWithoutFieldInput | Prisma.ValueUpdateWithWhereUniqueWithoutFieldInput[]
-  updateMany?: Prisma.ValueUpdateManyWithWhereWithoutFieldInput | Prisma.ValueUpdateManyWithWhereWithoutFieldInput[]
+  update?: Prisma.ValueUpdateWithWhereUniqueWithoutListInput | Prisma.ValueUpdateWithWhereUniqueWithoutListInput[]
+  updateMany?: Prisma.ValueUpdateManyWithWhereWithoutListInput | Prisma.ValueUpdateManyWithWhereWithoutListInput[]
   deleteMany?: Prisma.ValueScalarWhereInput | Prisma.ValueScalarWhereInput[]
 }
 
-export type ValueCreateWithoutFieldInput = {
+export type ValueCreateWithoutListInput = {
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
 }
 
-export type ValueUncheckedCreateWithoutFieldInput = {
+export type ValueUncheckedCreateWithoutListInput = {
   id?: number
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
 }
 
-export type ValueCreateOrConnectWithoutFieldInput = {
+export type ValueCreateOrConnectWithoutListInput = {
   where: Prisma.ValueWhereUniqueInput
-  create: Prisma.XOR<Prisma.ValueCreateWithoutFieldInput, Prisma.ValueUncheckedCreateWithoutFieldInput>
+  create: Prisma.XOR<Prisma.ValueCreateWithoutListInput, Prisma.ValueUncheckedCreateWithoutListInput>
 }
 
-export type ValueCreateManyFieldInputEnvelope = {
-  data: Prisma.ValueCreateManyFieldInput | Prisma.ValueCreateManyFieldInput[]
+export type ValueCreateManyListInputEnvelope = {
+  data: Prisma.ValueCreateManyListInput | Prisma.ValueCreateManyListInput[]
   skipDuplicates?: boolean
 }
 
-export type ValueUpsertWithWhereUniqueWithoutFieldInput = {
+export type ValueUpsertWithWhereUniqueWithoutListInput = {
   where: Prisma.ValueWhereUniqueInput
-  update: Prisma.XOR<Prisma.ValueUpdateWithoutFieldInput, Prisma.ValueUncheckedUpdateWithoutFieldInput>
-  create: Prisma.XOR<Prisma.ValueCreateWithoutFieldInput, Prisma.ValueUncheckedCreateWithoutFieldInput>
+  update: Prisma.XOR<Prisma.ValueUpdateWithoutListInput, Prisma.ValueUncheckedUpdateWithoutListInput>
+  create: Prisma.XOR<Prisma.ValueCreateWithoutListInput, Prisma.ValueUncheckedCreateWithoutListInput>
 }
 
-export type ValueUpdateWithWhereUniqueWithoutFieldInput = {
+export type ValueUpdateWithWhereUniqueWithoutListInput = {
   where: Prisma.ValueWhereUniqueInput
-  data: Prisma.XOR<Prisma.ValueUpdateWithoutFieldInput, Prisma.ValueUncheckedUpdateWithoutFieldInput>
+  data: Prisma.XOR<Prisma.ValueUpdateWithoutListInput, Prisma.ValueUncheckedUpdateWithoutListInput>
 }
 
-export type ValueUpdateManyWithWhereWithoutFieldInput = {
+export type ValueUpdateManyWithWhereWithoutListInput = {
   where: Prisma.ValueScalarWhereInput
-  data: Prisma.XOR<Prisma.ValueUpdateManyMutationInput, Prisma.ValueUncheckedUpdateManyWithoutFieldInput>
+  data: Prisma.XOR<Prisma.ValueUpdateManyMutationInput, Prisma.ValueUncheckedUpdateManyWithoutListInput>
 }
 
 export type ValueScalarWhereInput = {
@@ -397,26 +415,31 @@ export type ValueScalarWhereInput = {
   NOT?: Prisma.ValueScalarWhereInput | Prisma.ValueScalarWhereInput[]
   id?: Prisma.IntFilter<"Value"> | number
   data?: Prisma.JsonFilter<"Value">
-  fieldId?: Prisma.IntFilter<"Value"> | number
+  createdAt?: Prisma.DateTimeFilter<"Value"> | Date | string
+  listId?: Prisma.StringFilter<"Value"> | string
 }
 
-export type ValueCreateManyFieldInput = {
+export type ValueCreateManyListInput = {
   id?: number
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
 }
 
-export type ValueUpdateWithoutFieldInput = {
+export type ValueUpdateWithoutListInput = {
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ValueUncheckedUpdateWithoutFieldInput = {
+export type ValueUncheckedUpdateWithoutListInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ValueUncheckedUpdateManyWithoutFieldInput = {
+export type ValueUncheckedUpdateManyWithoutListInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -424,50 +447,55 @@ export type ValueUncheckedUpdateManyWithoutFieldInput = {
 export type ValueSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   data?: boolean
-  fieldId?: boolean
-  field?: boolean | Prisma.FieldDefaultArgs<ExtArgs>
+  createdAt?: boolean
+  listId?: boolean
+  list?: boolean | Prisma.ListDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["value"]>
 
 export type ValueSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   data?: boolean
-  fieldId?: boolean
-  field?: boolean | Prisma.FieldDefaultArgs<ExtArgs>
+  createdAt?: boolean
+  listId?: boolean
+  list?: boolean | Prisma.ListDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["value"]>
 
 export type ValueSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   data?: boolean
-  fieldId?: boolean
-  field?: boolean | Prisma.FieldDefaultArgs<ExtArgs>
+  createdAt?: boolean
+  listId?: boolean
+  list?: boolean | Prisma.ListDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["value"]>
 
 export type ValueSelectScalar = {
   id?: boolean
   data?: boolean
-  fieldId?: boolean
+  createdAt?: boolean
+  listId?: boolean
 }
 
-export type ValueOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "data" | "fieldId", ExtArgs["result"]["value"]>
+export type ValueOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "data" | "createdAt" | "listId", ExtArgs["result"]["value"]>
 export type ValueInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  field?: boolean | Prisma.FieldDefaultArgs<ExtArgs>
+  list?: boolean | Prisma.ListDefaultArgs<ExtArgs>
 }
 export type ValueIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  field?: boolean | Prisma.FieldDefaultArgs<ExtArgs>
+  list?: boolean | Prisma.ListDefaultArgs<ExtArgs>
 }
 export type ValueIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  field?: boolean | Prisma.FieldDefaultArgs<ExtArgs>
+  list?: boolean | Prisma.ListDefaultArgs<ExtArgs>
 }
 
 export type $ValuePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Value"
   objects: {
-    field: Prisma.$FieldPayload<ExtArgs>
+    list: Prisma.$ListPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     data: runtime.JsonValue
-    fieldId: number
+    createdAt: Date
+    listId: string
   }, ExtArgs["result"]["value"]>
   composites: {}
 }
@@ -862,7 +890,7 @@ readonly fields: ValueFieldRefs;
  */
 export interface Prisma__ValueClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  field<T extends Prisma.FieldDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FieldDefaultArgs<ExtArgs>>): Prisma.Prisma__FieldClient<runtime.Types.Result.GetResult<Prisma.$FieldPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  list<T extends Prisma.ListDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ListDefaultArgs<ExtArgs>>): Prisma.Prisma__ListClient<runtime.Types.Result.GetResult<Prisma.$ListPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -894,7 +922,8 @@ export interface Prisma__ValueClient<T, Null = never, ExtArgs extends runtime.Ty
 export interface ValueFieldRefs {
   readonly id: Prisma.FieldRef<"Value", 'Int'>
   readonly data: Prisma.FieldRef<"Value", 'Json'>
-  readonly fieldId: Prisma.FieldRef<"Value", 'Int'>
+  readonly createdAt: Prisma.FieldRef<"Value", 'DateTime'>
+  readonly listId: Prisma.FieldRef<"Value", 'String'>
 }
     
 

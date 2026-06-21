@@ -183,6 +183,7 @@ export type ListWhereInput = {
   desc?: Prisma.StringNullableFilter<"List"> | string | null
   createdAt?: Prisma.DateTimeFilter<"List"> | Date | string
   fields?: Prisma.FieldListRelationFilter
+  values?: Prisma.ValueListRelationFilter
 }
 
 export type ListOrderByWithRelationInput = {
@@ -192,6 +193,7 @@ export type ListOrderByWithRelationInput = {
   desc?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   fields?: Prisma.FieldOrderByRelationAggregateInput
+  values?: Prisma.ValueOrderByRelationAggregateInput
 }
 
 export type ListWhereUniqueInput = Prisma.AtLeast<{
@@ -204,6 +206,7 @@ export type ListWhereUniqueInput = Prisma.AtLeast<{
   desc?: Prisma.StringNullableFilter<"List"> | string | null
   createdAt?: Prisma.DateTimeFilter<"List"> | Date | string
   fields?: Prisma.FieldListRelationFilter
+  values?: Prisma.ValueListRelationFilter
 }, "id">
 
 export type ListOrderByWithAggregationInput = {
@@ -235,6 +238,7 @@ export type ListCreateInput = {
   desc?: string | null
   createdAt?: Date | string
   fields?: Prisma.FieldCreateNestedManyWithoutListInput
+  values?: Prisma.ValueCreateNestedManyWithoutListInput
 }
 
 export type ListUncheckedCreateInput = {
@@ -244,6 +248,7 @@ export type ListUncheckedCreateInput = {
   desc?: string | null
   createdAt?: Date | string
   fields?: Prisma.FieldUncheckedCreateNestedManyWithoutListInput
+  values?: Prisma.ValueUncheckedCreateNestedManyWithoutListInput
 }
 
 export type ListUpdateInput = {
@@ -253,6 +258,7 @@ export type ListUpdateInput = {
   desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fields?: Prisma.FieldUpdateManyWithoutListNestedInput
+  values?: Prisma.ValueUpdateManyWithoutListNestedInput
 }
 
 export type ListUncheckedUpdateInput = {
@@ -262,6 +268,7 @@ export type ListUncheckedUpdateInput = {
   desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fields?: Prisma.FieldUncheckedUpdateManyWithoutListNestedInput
+  values?: Prisma.ValueUncheckedUpdateManyWithoutListNestedInput
 }
 
 export type ListCreateManyInput = {
@@ -343,12 +350,27 @@ export type ListUpdateOneRequiredWithoutFieldsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ListUpdateToOneWithWhereWithoutFieldsInput, Prisma.ListUpdateWithoutFieldsInput>, Prisma.ListUncheckedUpdateWithoutFieldsInput>
 }
 
+export type ListCreateNestedOneWithoutValuesInput = {
+  create?: Prisma.XOR<Prisma.ListCreateWithoutValuesInput, Prisma.ListUncheckedCreateWithoutValuesInput>
+  connectOrCreate?: Prisma.ListCreateOrConnectWithoutValuesInput
+  connect?: Prisma.ListWhereUniqueInput
+}
+
+export type ListUpdateOneRequiredWithoutValuesNestedInput = {
+  create?: Prisma.XOR<Prisma.ListCreateWithoutValuesInput, Prisma.ListUncheckedCreateWithoutValuesInput>
+  connectOrCreate?: Prisma.ListCreateOrConnectWithoutValuesInput
+  upsert?: Prisma.ListUpsertWithoutValuesInput
+  connect?: Prisma.ListWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ListUpdateToOneWithWhereWithoutValuesInput, Prisma.ListUpdateWithoutValuesInput>, Prisma.ListUncheckedUpdateWithoutValuesInput>
+}
+
 export type ListCreateWithoutFieldsInput = {
   id?: string
   name: string
   emoji?: string | null
   desc?: string | null
   createdAt?: Date | string
+  values?: Prisma.ValueCreateNestedManyWithoutListInput
 }
 
 export type ListUncheckedCreateWithoutFieldsInput = {
@@ -357,6 +379,7 @@ export type ListUncheckedCreateWithoutFieldsInput = {
   emoji?: string | null
   desc?: string | null
   createdAt?: Date | string
+  values?: Prisma.ValueUncheckedCreateNestedManyWithoutListInput
 }
 
 export type ListCreateOrConnectWithoutFieldsInput = {
@@ -381,6 +404,7 @@ export type ListUpdateWithoutFieldsInput = {
   emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  values?: Prisma.ValueUpdateManyWithoutListNestedInput
 }
 
 export type ListUncheckedUpdateWithoutFieldsInput = {
@@ -389,6 +413,59 @@ export type ListUncheckedUpdateWithoutFieldsInput = {
   emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  values?: Prisma.ValueUncheckedUpdateManyWithoutListNestedInput
+}
+
+export type ListCreateWithoutValuesInput = {
+  id?: string
+  name: string
+  emoji?: string | null
+  desc?: string | null
+  createdAt?: Date | string
+  fields?: Prisma.FieldCreateNestedManyWithoutListInput
+}
+
+export type ListUncheckedCreateWithoutValuesInput = {
+  id?: string
+  name: string
+  emoji?: string | null
+  desc?: string | null
+  createdAt?: Date | string
+  fields?: Prisma.FieldUncheckedCreateNestedManyWithoutListInput
+}
+
+export type ListCreateOrConnectWithoutValuesInput = {
+  where: Prisma.ListWhereUniqueInput
+  create: Prisma.XOR<Prisma.ListCreateWithoutValuesInput, Prisma.ListUncheckedCreateWithoutValuesInput>
+}
+
+export type ListUpsertWithoutValuesInput = {
+  update: Prisma.XOR<Prisma.ListUpdateWithoutValuesInput, Prisma.ListUncheckedUpdateWithoutValuesInput>
+  create: Prisma.XOR<Prisma.ListCreateWithoutValuesInput, Prisma.ListUncheckedCreateWithoutValuesInput>
+  where?: Prisma.ListWhereInput
+}
+
+export type ListUpdateToOneWithWhereWithoutValuesInput = {
+  where?: Prisma.ListWhereInput
+  data: Prisma.XOR<Prisma.ListUpdateWithoutValuesInput, Prisma.ListUncheckedUpdateWithoutValuesInput>
+}
+
+export type ListUpdateWithoutValuesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fields?: Prisma.FieldUpdateManyWithoutListNestedInput
+}
+
+export type ListUncheckedUpdateWithoutValuesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fields?: Prisma.FieldUncheckedUpdateManyWithoutListNestedInput
 }
 
 
@@ -398,10 +475,12 @@ export type ListUncheckedUpdateWithoutFieldsInput = {
 
 export type ListCountOutputType = {
   fields: number
+  values: number
 }
 
 export type ListCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   fields?: boolean | ListCountOutputTypeCountFieldsArgs
+  values?: boolean | ListCountOutputTypeCountValuesArgs
 }
 
 /**
@@ -421,6 +500,13 @@ export type ListCountOutputTypeCountFieldsArgs<ExtArgs extends runtime.Types.Ext
   where?: Prisma.FieldWhereInput
 }
 
+/**
+ * ListCountOutputType without action
+ */
+export type ListCountOutputTypeCountValuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ValueWhereInput
+}
+
 
 export type ListSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -429,6 +515,7 @@ export type ListSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   desc?: boolean
   createdAt?: boolean
   fields?: boolean | Prisma.List$fieldsArgs<ExtArgs>
+  values?: boolean | Prisma.List$valuesArgs<ExtArgs>
   _count?: boolean | Prisma.ListCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["list"]>
 
@@ -459,6 +546,7 @@ export type ListSelectScalar = {
 export type ListOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "emoji" | "desc" | "createdAt", ExtArgs["result"]["list"]>
 export type ListInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   fields?: boolean | Prisma.List$fieldsArgs<ExtArgs>
+  values?: boolean | Prisma.List$valuesArgs<ExtArgs>
   _count?: boolean | Prisma.ListCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ListIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -468,6 +556,7 @@ export type $ListPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "List"
   objects: {
     fields: Prisma.$FieldPayload<ExtArgs>[]
+    values: Prisma.$ValuePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -870,6 +959,7 @@ readonly fields: ListFieldRefs;
 export interface Prisma__ListClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   fields<T extends Prisma.List$fieldsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.List$fieldsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  values<T extends Prisma.List$valuesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.List$valuesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ValuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1318,6 +1408,30 @@ export type List$fieldsArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   distinct?: Prisma.FieldScalarFieldEnum | Prisma.FieldScalarFieldEnum[]
+}
+
+/**
+ * List.values
+ */
+export type List$valuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Value
+   */
+  select?: Prisma.ValueSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Value
+   */
+  omit?: Prisma.ValueOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ValueInclude<ExtArgs> | null
+  where?: Prisma.ValueWhereInput
+  orderBy?: Prisma.ValueOrderByWithRelationInput | Prisma.ValueOrderByWithRelationInput[]
+  cursor?: Prisma.ValueWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ValueScalarFieldEnum | Prisma.ValueScalarFieldEnum[]
 }
 
 /**

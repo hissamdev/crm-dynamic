@@ -694,7 +694,8 @@ export type FieldScalarFieldEnum = (typeof FieldScalarFieldEnum)[keyof typeof Fi
 export const ValueScalarFieldEnum = {
   id: 'id',
   data: 'data',
-  fieldId: 'fieldId'
+  createdAt: 'createdAt',
+  listId: 'listId'
 } as const
 
 export type ValueScalarFieldEnum = (typeof ValueScalarFieldEnum)[keyof typeof ValueScalarFieldEnum]

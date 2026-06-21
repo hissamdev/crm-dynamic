@@ -19,6 +19,7 @@ model List {
   desc String?
   createdAt DateTime @default(now())
   fields Field[]
+  values Value[]
 
   @@map("lists")
 }
@@ -32,7 +33,6 @@ model Field {
   position Int
   listId String
   list List @relation(fields: [listId], references: [id])
-  values Value[]
 
   @@map("fields")
 }
@@ -40,8 +40,9 @@ model Field {
 model Value {
   id Int @id @default(autoincrement())
   data Json
-  fieldId Int
-  field Field @relation(fields: [fieldId], references: [id])
+  createdAt DateTime @default(now())
+  listId String
+  list List @relation(fields: [listId], references: [id])
 
   @@map("values")
 }

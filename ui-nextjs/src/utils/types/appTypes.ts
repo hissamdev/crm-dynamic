@@ -8,11 +8,19 @@ export type List = {
 };
 
 export type Field = {
+    id: number;
     name: string;
-    emoji: string;
-    type: string;
+    emoji: string | null;
+    type: string | null;
     label: string;
     position: number;
+};
+
+export type Value = {
+    id: number;
+    listId: string;
+    values: Record<string, string>;
+    // { label: "", label: "" }
 };
 
 export type ApiResponse = {
