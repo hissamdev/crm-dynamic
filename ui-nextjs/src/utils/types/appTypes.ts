@@ -19,7 +19,7 @@ export type Field = {
 export type Value = {
     id: number;
     listId: string;
-    values: Record<string, string>;
+    data: Record<string, string>;
     // { label: "", label: "" }
 };
 

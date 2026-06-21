@@ -1,11 +1,4 @@
-import ListTable from "./dashboard-ui/ListTable";
 import SidebarLists from "./dashboard-ui/SidebarLists";
-
-export type Row = {
-    id: number;
-    listId: number;
-    values: Record<string, string>;
-};
 
 export default function Dashboard() {
     return (
