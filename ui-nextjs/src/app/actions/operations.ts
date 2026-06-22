@@ -13,3 +13,5 @@ export async function actionRowCreate(fields: Field[], listId: string) {
     console.log("Created row successfully. Returning id:", created.id);
     return { created };
 }
+
+export async function actionColCreate() {}
