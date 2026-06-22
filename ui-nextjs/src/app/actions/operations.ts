@@ -13,4 +13,19 @@ export async function actionRowCreate(fields: Field[], listId: string) {
     return { created };
 }
 
-export async function actionColCreate() {}
+export async function actionColCreate(listId: string, position: number) {
+    console.log("Server action values\n", typeof listId, "\n", typeof position);
+    const res = await axios.post(
+        `${process.env.API_URL}/api/cols/create/`,
+        null,
+        {
+            params: {
+                listId,
+                position,
+            },
+        },
+    );
+    const created: Field = res.data;
+
+    return { created };
+}

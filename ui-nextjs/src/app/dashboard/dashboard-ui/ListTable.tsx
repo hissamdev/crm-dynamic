@@ -2,7 +2,7 @@
 import { Field, List, Value } from "@/src/utils/types/appTypes";
 import { PlusIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { actionRowCreate } from "../../actions/operations";
+import { actionColCreate, actionRowCreate } from "../../actions/operations";
 
 type Props = {
     slug: string;
@@ -48,7 +48,10 @@ export default function ListTable({ slug, list, values }: Props) {
     };
 
     const handleCreateRow = async (fields: Field[]) => {
-        const { created } = await actionRowCreate(fields, slug);
+        const { created }: { created: Value } = await actionRowCreate(
+            fields,
+            slug,
+        );
         if (!created.id) {
             return console.error("Failed to create row");
         }
@@ -63,7 +66,28 @@ export default function ListTable({ slug, list, values }: Props) {
         ]);
     };
 
-    const createCol = () => {};
+    const createCol = async (listId: string) => {
+        const { created }: { created: Field } = await actionColCreate(
+            listId,
+            fields.length + 1,
+        );
+        if (!created.id) {
+            console.error("Failed to create column");
+            return;
+        }
+        setFields((prev) => {
+            const newField: Field = {
+                id: created.id,
+                name: "",
+                emoji: "",
+                type: "text",
+                label: "",
+                position: created.position,
+            };
+
+            return [...prev, newField];
+        });
+    };
 
     return (
         <main className="mx-42 my-12">
@@ -106,7 +130,7 @@ export default function ListTable({ slug, list, values }: Props) {
                               ))}
                         <th>
                             <button
-                                onClick={createCol}
+                                onClick={() => createCol(listInfo.id)}
                                 className="px-3 py-1 flex items-center gap-2 cursor-pointer bg-white/20 hover:bg-white/10 active:bg-amber-300/20"
                             >
                                 <PlusIcon size={18} /> Column

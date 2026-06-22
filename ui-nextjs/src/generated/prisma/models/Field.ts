@@ -196,7 +196,7 @@ export type FieldGroupByOutputType = {
   name: string
   emoji: string
   type: string
-  label: string
+  label: string | null
   position: number
   listId: string
   _count: FieldCountAggregateOutputType | null
@@ -229,7 +229,7 @@ export type FieldWhereInput = {
   name?: Prisma.StringFilter<"Field"> | string
   emoji?: Prisma.StringFilter<"Field"> | string
   type?: Prisma.StringFilter<"Field"> | string
-  label?: Prisma.StringFilter<"Field"> | string
+  label?: Prisma.StringNullableFilter<"Field"> | string | null
   position?: Prisma.IntFilter<"Field"> | number
   listId?: Prisma.StringFilter<"Field"> | string
   list?: Prisma.XOR<Prisma.ListScalarRelationFilter, Prisma.ListWhereInput>
@@ -240,7 +240,7 @@ export type FieldOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   emoji?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  label?: Prisma.SortOrder
+  label?: Prisma.SortOrderInput | Prisma.SortOrder
   position?: Prisma.SortOrder
   listId?: Prisma.SortOrder
   list?: Prisma.ListOrderByWithRelationInput
@@ -254,7 +254,7 @@ export type FieldWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Field"> | string
   emoji?: Prisma.StringFilter<"Field"> | string
   type?: Prisma.StringFilter<"Field"> | string
-  label?: Prisma.StringFilter<"Field"> | string
+  label?: Prisma.StringNullableFilter<"Field"> | string | null
   position?: Prisma.IntFilter<"Field"> | number
   listId?: Prisma.StringFilter<"Field"> | string
   list?: Prisma.XOR<Prisma.ListScalarRelationFilter, Prisma.ListWhereInput>
@@ -265,7 +265,7 @@ export type FieldOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   emoji?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  label?: Prisma.SortOrder
+  label?: Prisma.SortOrderInput | Prisma.SortOrder
   position?: Prisma.SortOrder
   listId?: Prisma.SortOrder
   _count?: Prisma.FieldCountOrderByAggregateInput
@@ -283,7 +283,7 @@ export type FieldScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Field"> | string
   emoji?: Prisma.StringWithAggregatesFilter<"Field"> | string
   type?: Prisma.StringWithAggregatesFilter<"Field"> | string
-  label?: Prisma.StringWithAggregatesFilter<"Field"> | string
+  label?: Prisma.StringNullableWithAggregatesFilter<"Field"> | string | null
   position?: Prisma.IntWithAggregatesFilter<"Field"> | number
   listId?: Prisma.StringWithAggregatesFilter<"Field"> | string
 }
@@ -293,7 +293,7 @@ export type FieldCreateInput = {
   name: string
   emoji: string
   type: string
-  label: string
+  label?: string | null
   position: number
   list: Prisma.ListCreateNestedOneWithoutFieldsInput
 }
@@ -303,7 +303,7 @@ export type FieldUncheckedCreateInput = {
   name: string
   emoji: string
   type: string
-  label: string
+  label?: string | null
   position: number
   listId: string
 }
@@ -313,7 +313,7 @@ export type FieldUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   emoji?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  label?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   position?: Prisma.IntFieldUpdateOperationsInput | number
   list?: Prisma.ListUpdateOneRequiredWithoutFieldsNestedInput
 }
@@ -323,7 +323,7 @@ export type FieldUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   emoji?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  label?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   position?: Prisma.IntFieldUpdateOperationsInput | number
   listId?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -333,7 +333,7 @@ export type FieldCreateManyInput = {
   name: string
   emoji: string
   type: string
-  label: string
+  label?: string | null
   position: number
   listId: string
 }
@@ -343,7 +343,7 @@ export type FieldUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   emoji?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  label?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   position?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -352,7 +352,7 @@ export type FieldUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   emoji?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  label?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   position?: Prisma.IntFieldUpdateOperationsInput | number
   listId?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -460,7 +460,7 @@ export type FieldCreateWithoutListInput = {
   name: string
   emoji: string
   type: string
-  label: string
+  label?: string | null
   position: number
 }
 
@@ -469,7 +469,7 @@ export type FieldUncheckedCreateWithoutListInput = {
   name: string
   emoji: string
   type: string
-  label: string
+  label?: string | null
   position: number
 }
 
@@ -507,7 +507,7 @@ export type FieldScalarWhereInput = {
   name?: Prisma.StringFilter<"Field"> | string
   emoji?: Prisma.StringFilter<"Field"> | string
   type?: Prisma.StringFilter<"Field"> | string
-  label?: Prisma.StringFilter<"Field"> | string
+  label?: Prisma.StringNullableFilter<"Field"> | string | null
   position?: Prisma.IntFilter<"Field"> | number
   listId?: Prisma.StringFilter<"Field"> | string
 }
@@ -517,7 +517,7 @@ export type FieldCreateManyListInput = {
   name: string
   emoji: string
   type: string
-  label: string
+  label?: string | null
   position: number
 }
 
@@ -526,7 +526,7 @@ export type FieldUpdateWithoutListInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   emoji?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  label?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   position?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -535,7 +535,7 @@ export type FieldUncheckedUpdateWithoutListInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   emoji?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  label?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   position?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -544,7 +544,7 @@ export type FieldUncheckedUpdateManyWithoutListInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   emoji?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  label?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   position?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -614,7 +614,7 @@ export type $FieldPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     name: string
     emoji: string
     type: string
-    label: string
+    label: string | null
     position: number
     listId: string
   }, ExtArgs["result"]["field"]>

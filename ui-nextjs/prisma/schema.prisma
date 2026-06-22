@@ -29,7 +29,7 @@ model Field {
   name String
   emoji String
   type String
-  label String
+  label String?
   position Int
   listId String
   list List @relation(fields: [listId], references: [id])

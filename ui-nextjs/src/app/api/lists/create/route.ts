@@ -21,7 +21,10 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const safeList = listFieldsSchema.safeParse(body.listWithFields);
     if (!safeList.success) {
-        console.error(safeList.error.issues);
+        console.error(
+            "Failed to validate listWithFields in API route\n",
+            safeList.error.issues,
+        );
         return NextResponse.json(
             {
                 success: false,
