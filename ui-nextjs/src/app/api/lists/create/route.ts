@@ -18,15 +18,16 @@ export const listFieldsSchema = listSchema.extend({
 });
 
 export async function POST(req: NextRequest) {
-    // body.listWithFields contains an object with list info and the fields key.
     const body = await req.json();
     const safeList = listFieldsSchema.safeParse(body.listWithFields);
     if (!safeList.success) {
+        console.error(safeList.error.issues);
         return NextResponse.json(
             {
                 success: false,
                 message: "Validation failed",
                 error: safeList.error.issues,
+                data: body.listWithFields,
             },
             { status: 400 },
         );
@@ -39,7 +40,13 @@ export async function POST(req: NextRequest) {
                 emoji: safeList.data.emoji,
                 desc: safeList.data.desc,
                 fields: {
-                    create: safeList.data.fields,
+                    create: safeList.data.fields.map((field) => ({
+                        name: field.name,
+                        emoji: field.emoji,
+                        type: field.type,
+                        label: field.label,
+                        position: field.position,
+                    })),
                 },
             },
         });

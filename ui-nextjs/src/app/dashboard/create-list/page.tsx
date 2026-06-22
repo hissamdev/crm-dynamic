@@ -34,8 +34,8 @@ export default function CreateList() {
             const field = {
                 id: `field-${Date.now()}`,
                 name: "",
-                type: "",
                 emoji: "",
+                type: "",
             };
             return [...prev, field];
         });

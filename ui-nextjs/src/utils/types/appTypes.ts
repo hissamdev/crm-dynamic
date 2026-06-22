@@ -8,7 +8,7 @@ export type List = {
 };
 
 export type Field = {
-    id: number;
+    id: string;
     name: string;
     emoji: string | null;
     type: string | null;

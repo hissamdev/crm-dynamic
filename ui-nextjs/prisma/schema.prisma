@@ -25,10 +25,10 @@ model List {
 }
 
 model Field {
-  id Int @id @default(autoincrement())
+  id String @id @default(uuid())
   name String
-  emoji String?
-  type String?
+  emoji String
+  type String
   label String
   position Int
   listId String

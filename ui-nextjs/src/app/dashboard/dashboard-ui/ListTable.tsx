@@ -34,11 +34,7 @@ export default function ListTable({ slug, list, values }: Props) {
         );
     };
 
-    const handleColChange = (
-        fieldId: number,
-        fieldName: string,
-        value: string,
-    ) => {
+    const handleColChange = (fieldId: string, value: string) => {
         setFields((prev) =>
             prev.map((field) =>
                 field.id === fieldId
@@ -99,7 +95,6 @@ export default function ListTable({ slug, list, values }: Props) {
                                           onChange={(e) =>
                                               handleColChange(
                                                   field.id,
-                                                  field.name,
                                                   e.target.value,
                                               )
                                           }

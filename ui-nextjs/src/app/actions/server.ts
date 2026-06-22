@@ -3,7 +3,6 @@ import { Field } from "../dashboard/create-list/page";
 import { prepareFields } from "@/src/utils/functions/utility";
 import axios, { isAxiosError } from "axios";
 import { fieldSchema, listSchema } from "@/src/utils/types/zodTypes";
-import prisma from "@/src/lib/prisma";
 
 export async function handleCreateList(fields: Field[], formData: FormData) {
     const listInfo = {
@@ -44,27 +43,4 @@ export async function handleCreateList(fields: Field[], formData: FormData) {
         }
         console.error("Failed to create list:", err);
     }
-}
-
-export async function handleGetTableInfo(slug: string) {
-    // const res = axios.get(`${process.env.API_URL}/api/lists/${slug}`);
-
-    // Fetch fields from listId
-    const list = await prisma.list.findFirst({
-        where: { id: slug },
-        include: {
-            fields: {
-                orderBy: {
-                    position: "asc",
-                },
-            },
-        },
-    });
-
-    const values = await prisma.value.findMany({
-        where: { listId: slug },
-        orderBy: { createdAt: "desc" },
-    });
-
-    return { list, values };
 }
