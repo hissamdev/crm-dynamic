@@ -15,8 +15,6 @@ export default function ListTable({ slug, list, values }: Props) {
     const [fields, setFields] = useState<Field[]>(list.fields);
     const [rows, setRows] = useState<Value[]>(values);
     const [loading, setLoading] = useState(false);
-    // Example data
-    console.log("Our fields", fields);
 
     const handleRowChange = (rowId: number, label: string, value: string) => {
         setRows((prev) =>
