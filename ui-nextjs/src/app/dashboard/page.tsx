@@ -1,4 +1,4 @@
-import SidebarLists from "./dashboard-ui/SidebarLists";
+import SidebarLists from "./[slug]/SidebarLists";
 
 export default function Dashboard() {
     return (

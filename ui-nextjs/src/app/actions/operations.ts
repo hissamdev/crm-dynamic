@@ -33,7 +33,7 @@ export async function actionColCreate(listId: string, position: number) {
 export async function actionRowUpdate(
     listId: string,
     rowId: number,
-    data: Value,
+    data: Record<string, string>,
 ) {
     const res = await axios.put(`${process.env.API_URL}/api/rows/update`, {
         listId,

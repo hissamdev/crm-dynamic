@@ -90,6 +90,7 @@ export const FieldScalarFieldEnum = {
   type: 'type',
   label: 'label',
   position: 'position',
+  deleted: 'deleted',
   listId: 'listId'
 } as const
 

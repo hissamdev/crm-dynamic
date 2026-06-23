@@ -1,6 +1,6 @@
 import axios from "axios";
-import SidebarLists from "../dashboard-ui/SidebarLists";
-import ListTable from "../dashboard-ui/ListTable";
+import SidebarLists from "./SidebarLists";
+import ListTable from "./ListTable";
 import type { List, Value } from "@/src/utils/types/appTypes";
 
 export default async function List({

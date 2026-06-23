@@ -41,6 +41,7 @@ export type FieldMinAggregateOutputType = {
   type: string | null
   label: string | null
   position: number | null
+  deleted: boolean | null
   listId: string | null
 }
 
@@ -51,6 +52,7 @@ export type FieldMaxAggregateOutputType = {
   type: string | null
   label: string | null
   position: number | null
+  deleted: boolean | null
   listId: string | null
 }
 
@@ -61,6 +63,7 @@ export type FieldCountAggregateOutputType = {
   type: number
   label: number
   position: number
+  deleted: number
   listId: number
   _all: number
 }
@@ -81,6 +84,7 @@ export type FieldMinAggregateInputType = {
   type?: true
   label?: true
   position?: true
+  deleted?: true
   listId?: true
 }
 
@@ -91,6 +95,7 @@ export type FieldMaxAggregateInputType = {
   type?: true
   label?: true
   position?: true
+  deleted?: true
   listId?: true
 }
 
@@ -101,6 +106,7 @@ export type FieldCountAggregateInputType = {
   type?: true
   label?: true
   position?: true
+  deleted?: true
   listId?: true
   _all?: true
 }
@@ -198,6 +204,7 @@ export type FieldGroupByOutputType = {
   type: string
   label: string | null
   position: number
+  deleted: boolean
   listId: string
   _count: FieldCountAggregateOutputType | null
   _avg: FieldAvgAggregateOutputType | null
@@ -231,6 +238,7 @@ export type FieldWhereInput = {
   type?: Prisma.StringFilter<"Field"> | string
   label?: Prisma.StringNullableFilter<"Field"> | string | null
   position?: Prisma.IntFilter<"Field"> | number
+  deleted?: Prisma.BoolFilter<"Field"> | boolean
   listId?: Prisma.StringFilter<"Field"> | string
   list?: Prisma.XOR<Prisma.ListScalarRelationFilter, Prisma.ListWhereInput>
 }
@@ -242,6 +250,7 @@ export type FieldOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   label?: Prisma.SortOrderInput | Prisma.SortOrder
   position?: Prisma.SortOrder
+  deleted?: Prisma.SortOrder
   listId?: Prisma.SortOrder
   list?: Prisma.ListOrderByWithRelationInput
 }
@@ -256,6 +265,7 @@ export type FieldWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.StringFilter<"Field"> | string
   label?: Prisma.StringNullableFilter<"Field"> | string | null
   position?: Prisma.IntFilter<"Field"> | number
+  deleted?: Prisma.BoolFilter<"Field"> | boolean
   listId?: Prisma.StringFilter<"Field"> | string
   list?: Prisma.XOR<Prisma.ListScalarRelationFilter, Prisma.ListWhereInput>
 }, "id">
@@ -267,6 +277,7 @@ export type FieldOrderByWithAggregationInput = {
   type?: Prisma.SortOrder
   label?: Prisma.SortOrderInput | Prisma.SortOrder
   position?: Prisma.SortOrder
+  deleted?: Prisma.SortOrder
   listId?: Prisma.SortOrder
   _count?: Prisma.FieldCountOrderByAggregateInput
   _avg?: Prisma.FieldAvgOrderByAggregateInput
@@ -285,6 +296,7 @@ export type FieldScalarWhereWithAggregatesInput = {
   type?: Prisma.StringWithAggregatesFilter<"Field"> | string
   label?: Prisma.StringNullableWithAggregatesFilter<"Field"> | string | null
   position?: Prisma.IntWithAggregatesFilter<"Field"> | number
+  deleted?: Prisma.BoolWithAggregatesFilter<"Field"> | boolean
   listId?: Prisma.StringWithAggregatesFilter<"Field"> | string
 }
 
@@ -295,6 +307,7 @@ export type FieldCreateInput = {
   type: string
   label?: string | null
   position: number
+  deleted?: boolean
   list: Prisma.ListCreateNestedOneWithoutFieldsInput
 }
 
@@ -305,6 +318,7 @@ export type FieldUncheckedCreateInput = {
   type: string
   label?: string | null
   position: number
+  deleted?: boolean
   listId: string
 }
 
@@ -315,6 +329,7 @@ export type FieldUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   position?: Prisma.IntFieldUpdateOperationsInput | number
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   list?: Prisma.ListUpdateOneRequiredWithoutFieldsNestedInput
 }
 
@@ -325,6 +340,7 @@ export type FieldUncheckedUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   position?: Prisma.IntFieldUpdateOperationsInput | number
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   listId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -335,6 +351,7 @@ export type FieldCreateManyInput = {
   type: string
   label?: string | null
   position: number
+  deleted?: boolean
   listId: string
 }
 
@@ -345,6 +362,7 @@ export type FieldUpdateManyMutationInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   position?: Prisma.IntFieldUpdateOperationsInput | number
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type FieldUncheckedUpdateManyInput = {
@@ -354,6 +372,7 @@ export type FieldUncheckedUpdateManyInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   position?: Prisma.IntFieldUpdateOperationsInput | number
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   listId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -374,6 +393,7 @@ export type FieldCountOrderByAggregateInput = {
   type?: Prisma.SortOrder
   label?: Prisma.SortOrder
   position?: Prisma.SortOrder
+  deleted?: Prisma.SortOrder
   listId?: Prisma.SortOrder
 }
 
@@ -388,6 +408,7 @@ export type FieldMaxOrderByAggregateInput = {
   type?: Prisma.SortOrder
   label?: Prisma.SortOrder
   position?: Prisma.SortOrder
+  deleted?: Prisma.SortOrder
   listId?: Prisma.SortOrder
 }
 
@@ -398,6 +419,7 @@ export type FieldMinOrderByAggregateInput = {
   type?: Prisma.SortOrder
   label?: Prisma.SortOrder
   position?: Prisma.SortOrder
+  deleted?: Prisma.SortOrder
   listId?: Prisma.SortOrder
 }
 
@@ -455,6 +477,10 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type FieldCreateWithoutListInput = {
   id?: string
   name: string
@@ -462,6 +488,7 @@ export type FieldCreateWithoutListInput = {
   type: string
   label?: string | null
   position: number
+  deleted?: boolean
 }
 
 export type FieldUncheckedCreateWithoutListInput = {
@@ -471,6 +498,7 @@ export type FieldUncheckedCreateWithoutListInput = {
   type: string
   label?: string | null
   position: number
+  deleted?: boolean
 }
 
 export type FieldCreateOrConnectWithoutListInput = {
@@ -509,6 +537,7 @@ export type FieldScalarWhereInput = {
   type?: Prisma.StringFilter<"Field"> | string
   label?: Prisma.StringNullableFilter<"Field"> | string | null
   position?: Prisma.IntFilter<"Field"> | number
+  deleted?: Prisma.BoolFilter<"Field"> | boolean
   listId?: Prisma.StringFilter<"Field"> | string
 }
 
@@ -519,6 +548,7 @@ export type FieldCreateManyListInput = {
   type: string
   label?: string | null
   position: number
+  deleted?: boolean
 }
 
 export type FieldUpdateWithoutListInput = {
@@ -528,6 +558,7 @@ export type FieldUpdateWithoutListInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   position?: Prisma.IntFieldUpdateOperationsInput | number
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type FieldUncheckedUpdateWithoutListInput = {
@@ -537,6 +568,7 @@ export type FieldUncheckedUpdateWithoutListInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   position?: Prisma.IntFieldUpdateOperationsInput | number
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type FieldUncheckedUpdateManyWithoutListInput = {
@@ -546,6 +578,7 @@ export type FieldUncheckedUpdateManyWithoutListInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   position?: Prisma.IntFieldUpdateOperationsInput | number
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -557,6 +590,7 @@ export type FieldSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   type?: boolean
   label?: boolean
   position?: boolean
+  deleted?: boolean
   listId?: boolean
   list?: boolean | Prisma.ListDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["field"]>
@@ -568,6 +602,7 @@ export type FieldSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   type?: boolean
   label?: boolean
   position?: boolean
+  deleted?: boolean
   listId?: boolean
   list?: boolean | Prisma.ListDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["field"]>
@@ -579,6 +614,7 @@ export type FieldSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   type?: boolean
   label?: boolean
   position?: boolean
+  deleted?: boolean
   listId?: boolean
   list?: boolean | Prisma.ListDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["field"]>
@@ -590,10 +626,11 @@ export type FieldSelectScalar = {
   type?: boolean
   label?: boolean
   position?: boolean
+  deleted?: boolean
   listId?: boolean
 }
 
-export type FieldOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "emoji" | "type" | "label" | "position" | "listId", ExtArgs["result"]["field"]>
+export type FieldOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "emoji" | "type" | "label" | "position" | "deleted" | "listId", ExtArgs["result"]["field"]>
 export type FieldInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   list?: boolean | Prisma.ListDefaultArgs<ExtArgs>
 }
@@ -616,6 +653,7 @@ export type $FieldPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     type: string
     label: string | null
     position: number
+    deleted: boolean
     listId: string
   }, ExtArgs["result"]["field"]>
   composites: {}
@@ -1047,6 +1085,7 @@ export interface FieldFieldRefs {
   readonly type: Prisma.FieldRef<"Field", 'String'>
   readonly label: Prisma.FieldRef<"Field", 'String'>
   readonly position: Prisma.FieldRef<"Field", 'Int'>
+  readonly deleted: Prisma.FieldRef<"Field", 'Boolean'>
   readonly listId: Prisma.FieldRef<"Field", 'String'>
 }
     

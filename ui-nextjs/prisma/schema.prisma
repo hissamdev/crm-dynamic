@@ -31,6 +31,7 @@ model Field {
   type String
   label String?
   position Int
+  deleted Boolean @default(false)
   listId String
   list List @relation(fields: [listId], references: [id], onDelete: Cascade)
 
