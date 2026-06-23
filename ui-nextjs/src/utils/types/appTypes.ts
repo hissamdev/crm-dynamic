@@ -14,6 +14,7 @@ export type Field = {
     type: string | null;
     label: string;
     position: number;
+    deleted: boolean;
 };
 
 export type Value = {

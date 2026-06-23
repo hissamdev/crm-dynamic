@@ -72,7 +72,7 @@ export default function ListTable({ slug, list, values }: Props) {
         );
     };
 
-    const handleCreateRow = async (fields: Field[]) => {
+    const handleRowCreate = async (fields: Field[]) => {
         const { created }: { created: Value } = await actionRowCreate(
             fields,
             slug,
@@ -91,7 +91,7 @@ export default function ListTable({ slug, list, values }: Props) {
         ]);
     };
 
-    const handleCreateCol = async (listId: string) => {
+    const handleColCreate = async (listId: string) => {
         const { created }: { created: Field } = await actionColCreate(
             listId,
             fields.length + 1,
@@ -107,10 +107,28 @@ export default function ListTable({ slug, list, values }: Props) {
                 emoji: "",
                 type: "text",
                 label: "",
+                deleted: false,
                 position: created.position,
             };
 
             return [...prev, newField];
+        });
+    };
+
+    const handleColDelete = (fieldId: string) => {
+        const field = fields.find((field) => field.id === fieldId);
+        if (!field) {
+            return;
+        }
+        const deletedRow: Field = {
+            ...field,
+            deleted: true,
+        };
+
+        setFields((prev) => {
+            return prev.map((field) =>
+                field.id === fieldId ? deletedRow : field,
+            );
         });
     };
 
@@ -119,7 +137,7 @@ export default function ListTable({ slug, list, values }: Props) {
             <div>
                 <div className="header-row mb-4 flex justify-between items-end">
                     <button
-                        onClick={() => handleCreateRow(fields)}
+                        onClick={() => handleRowCreate(fields)}
                         className="px-3 py-1 flex items-center gap-2 cursor-pointer bg-white/20 hover:bg-white/10 active:bg-amber-300/20"
                     >
                         <PlusIcon size={18} /> Row
@@ -132,53 +150,60 @@ export default function ListTable({ slug, list, values }: Props) {
                 <table>
                     <thead>
                         <tr className="border border-gray-700">
-                            {fields.length === 0
-                                ? null
-                                : fields.map((field) => (
-                                      <th
-                                          key={field.id}
-                                          className="min-w-52 text-left border-l border-gray-700"
-                                      >
-                                          {field.emoji}
-                                          <input
-                                              onChange={(e) =>
-                                                  handleColChange(
-                                                      field.id,
-                                                      e.target.value,
-                                                  )
-                                              }
-                                              type="text"
-                                              value={field.name}
-                                              className="px-8 py-1 hover:bg-white/3"
-                                          />
-                                      </th>
-                                  ))}
+                            {fields
+                                .filter((field) => !field.deleted)
+                                .map((field) => (
+                                    <th
+                                        key={field.id}
+                                        className="min-w-52 text-left border-l border-gray-700"
+                                    >
+                                        {field.emoji}
+                                        <input
+                                            onClick={() =>
+                                                handleColDelete(field.id)
+                                            }
+                                            onChange={(e) =>
+                                                handleColChange(
+                                                    field.id,
+                                                    e.target.value,
+                                                )
+                                            }
+                                            type="text"
+                                            value={field.name}
+                                            className="px-8 py-1 hover:bg-white/3"
+                                        />
+                                    </th>
+                                ))}
                         </tr>
                     </thead>
                     <tbody>
-                        {!rows || rows.length === 0
+                        {!rows || !rows.length
                             ? null
                             : rows.map((row) => (
                                   <tr key={row.id}>
-                                      {fields.map((field) => (
-                                          <td
-                                              key={field.id}
-                                              className="min-w-52 text-left border border-gray-700"
-                                          >
-                                              <input
-                                                  onChange={(e) => {
-                                                      console.log("Reached");
-                                                      handleRowChange(
-                                                          row.id,
-                                                          field.id,
-                                                          e.target.value,
-                                                      );
-                                                  }}
-                                                  value={row.data[field.id]}
-                                                  className="py-1 px-2 w-full hover:bg-white/4"
-                                              />
-                                          </td>
-                                      ))}
+                                      {fields
+                                          .filter((field) => !field.deleted)
+                                          .map((field) => (
+                                              <td
+                                                  key={field.id}
+                                                  className="min-w-52 text-left border border-gray-700"
+                                              >
+                                                  <input
+                                                      onChange={(e) => {
+                                                          console.log(
+                                                              "Reached",
+                                                          );
+                                                          handleRowChange(
+                                                              row.id,
+                                                              field.id,
+                                                              e.target.value,
+                                                          );
+                                                      }}
+                                                      value={row.data[field.id]}
+                                                      className="py-1 px-2 w-full hover:bg-white/4"
+                                                  />
+                                              </td>
+                                          ))}
                                   </tr>
                               ))}
                     </tbody>
@@ -186,7 +211,7 @@ export default function ListTable({ slug, list, values }: Props) {
             </div>
             <div>
                 <button
-                    onClick={() => handleCreateCol(listInfo.id)}
+                    onClick={() => handleColCreate(listInfo.id)}
                     className="mt-12 px-3 py-1 flex items-center gap-2 cursor-pointer bg-white/20 hover:bg-white/10 active:bg-amber-300/20"
                 >
                     <PlusIcon size={18} /> Column
