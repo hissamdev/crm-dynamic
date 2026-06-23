@@ -6,6 +6,7 @@ import z from "zod";
 const schema = z.string();
 const fieldApiSchema = z.array(
     z.object({
+        id: z.string(),
         name: z
             .string()
             .min(1, "Field name should be at least 1 character")
@@ -44,7 +45,7 @@ export async function POST(req: Request) {
 
     try {
         const readyFields = Object.fromEntries(
-            safeFields.data.map((field) => [[field.label], ""]),
+            safeFields.data.map((field) => [[field.id], ""]),
         );
 
         const created = await prisma.value.create({

@@ -1,3 +1,3 @@
 export async function PUT() {
-    // Row Id, listId,
+    // Row Id, listId, data
 }

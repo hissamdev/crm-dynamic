@@ -1,6 +1,6 @@
 "use server";
 
-import { Field } from "@/src/utils/types/appTypes";
+import { Field, Value } from "@/src/utils/types/appTypes";
 import axios from "axios";
 
 export async function actionRowCreate(fields: Field[], listId: string) {
@@ -28,4 +28,16 @@ export async function actionColCreate(listId: string, position: number) {
     const created: Field = res.data;
 
     return { created };
+}
+
+export async function actionRowUpdate(
+    listId: string,
+    rowId: number,
+    data: Value,
+) {
+    const res = await axios.put(`${process.env.API_URL}/api/rows/update`, {
+        listId,
+        rowId,
+        data,
+    });
 }

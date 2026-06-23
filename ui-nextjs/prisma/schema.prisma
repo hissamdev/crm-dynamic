@@ -32,7 +32,7 @@ model Field {
   label String?
   position Int
   listId String
-  list List @relation(fields: [listId], references: [id])
+  list List @relation(fields: [listId], references: [id], onDelete: Cascade)
 
   @@map("fields")
 }
@@ -42,7 +42,7 @@ model Value {
   data Json
   createdAt DateTime @default(now())
   listId String
-  list List @relation(fields: [listId], references: [id])
+  list List @relation(fields: [listId], references: [id], onDelete: Cascade)
 
   @@map("values")
 }

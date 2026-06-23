@@ -16,21 +16,28 @@ export default function ListTable({ slug, list, values }: Props) {
     const [rows, setRows] = useState<Value[]>(values);
     const [loading, setLoading] = useState(false);
 
-    const handleRowChange = (rowId: number, label: string, value: string) => {
+    const handleRowChange = (rowId: number, fieldId: string, value: string) => {
+        console.log(fieldId);
+        const row = rows.find((row) => row.id === rowId);
+        if (!row) {
+            return;
+        }
+        const updatedRow: Value = {
+            ...row,
+            data: {
+                ...row.data,
+                [fieldId]: value,
+            },
+        };
+
         setRows((prev) =>
-            prev.map((row) =>
-                row.id === rowId
-                    ? {
-                          ...row, // id and listId
-                          data: {
-                              ...row.data, // Other field columns
-                              [label]: value,
-                          },
-                      }
-                    : row,
-            ),
+            prev.map((row) => (row.id === rowId ? updatedRow : row)),
         );
+
+        // handleRowUpdate(listInfo.id, rowId);
     };
+
+    const handleRowUpdate = (listId: string, rowId: number, data: Value) => {};
 
     const handleColChange = (fieldId: string, value: string) => {
         setFields((prev) =>
@@ -64,7 +71,7 @@ export default function ListTable({ slug, list, values }: Props) {
         ]);
     };
 
-    const createCol = async (listId: string) => {
+    const handleCreateCol = async (listId: string) => {
         const { created }: { created: Field } = await actionColCreate(
             listId,
             fields.length + 1,
@@ -128,7 +135,7 @@ export default function ListTable({ slug, list, values }: Props) {
                               ))}
                         <th>
                             <button
-                                onClick={() => createCol(listInfo.id)}
+                                onClick={() => handleCreateCol(listInfo.id)}
                                 className="px-3 py-1 flex items-center gap-2 cursor-pointer bg-white/20 hover:bg-white/10 active:bg-amber-300/20"
                             >
                                 <PlusIcon size={18} /> Column
@@ -147,13 +154,14 @@ export default function ListTable({ slug, list, values }: Props) {
                                           className="min-w-52 text-left border border-gray-700"
                                       >
                                           <input
-                                              onChange={(e) =>
+                                              onChange={(e) => {
+                                                  console.log("Reached");
                                                   handleRowChange(
                                                       row.id,
-                                                      field.label,
+                                                      field.id,
                                                       e.target.value,
-                                                  )
-                                              }
+                                                  );
+                                              }}
                                               value={row.data[field.label]}
                                               className="py-2 px-8 w-full hover:bg-white/4"
                                           />
