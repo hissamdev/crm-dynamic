@@ -4,6 +4,7 @@ import { PlusIcon } from "lucide-react";
 import { useRef, useState } from "react";
 import {
     actionColCreate,
+    actionColUpdate,
     actionRowCreate,
     actionRowUpdate,
 } from "../../actions/operations";
@@ -70,6 +71,12 @@ export default function ListTable({ slug, list, values }: Props) {
                     : field,
             ),
         );
+
+        handleColUpdate(fieldId, value);
+    };
+
+    const handleColUpdate = async (fieldId: string, value: string) => {
+        await actionColUpdate(fieldId, listInfo.id, value);
     };
 
     const handleRowCreate = async (fields: Field[]) => {
@@ -159,9 +166,6 @@ export default function ListTable({ slug, list, values }: Props) {
                                     >
                                         {field.emoji}
                                         <input
-                                            onClick={() =>
-                                                handleColDelete(field.id)
-                                            }
                                             onChange={(e) =>
                                                 handleColChange(
                                                     field.id,

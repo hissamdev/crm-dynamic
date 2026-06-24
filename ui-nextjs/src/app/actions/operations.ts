@@ -41,3 +41,15 @@ export async function actionRowUpdate(
         data,
     });
 }
+
+export async function actionColUpdate(
+    fieldId: string,
+    listId: string,
+    value: string,
+) {
+    const res = await axios.put(`${process.env.API_URL}/api/cols/update`, {
+        listId,
+        fieldId,
+        value,
+    });
+}
