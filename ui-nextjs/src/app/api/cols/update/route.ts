@@ -1,6 +1,6 @@
 import prisma from "@/src/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
-import z, { success } from "zod";
+import z from "zod";
 
 const schema = z.object({
     listId: z.string(),
@@ -9,7 +9,7 @@ const schema = z.object({
 });
 
 export async function PUT(req: NextRequest) {
-    const body = req.json();
+    const body = await req.json();
     const safeBody = schema.safeParse(body);
     if (!safeBody.success) {
         console.error(safeBody.error.issues);
