@@ -16,7 +16,7 @@ export default async function List({
     const { data } = res;
 
     return (
-        <div className="grid grid-cols-[20rem_1fr]">
+        <div className="flex ">
             <SidebarLists lists={data} />
             <ListTable slug={slug} list={list} values={values} />
         </div>
