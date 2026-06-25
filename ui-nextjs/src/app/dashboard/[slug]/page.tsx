@@ -1,7 +1,7 @@
 import axios from "axios";
 import SidebarLists from "./SidebarLists";
 import ListTable from "./ListTable";
-import type { List, Value } from "@/src/utils/types/appTypes";
+import type { ApiList, List, Value } from "@/src/utils/types/appTypes";
 
 export default async function List({
     params,
@@ -12,9 +12,12 @@ export default async function List({
     const listRes = await axios.get(`${process.env.API_URL}/api/lists/${slug}`);
     const { list, values }: { list: List; values: Value[] } = listRes.data;
 
+    const res: ApiList = await axios.get(`http://localhost:3000/api/lists`);
+    const { data } = res;
+
     return (
         <div className="grid grid-cols-[20rem_1fr]">
-            <SidebarLists />
+            <SidebarLists lists={data} />
             <ListTable slug={slug} list={list} values={values} />
         </div>
     );
