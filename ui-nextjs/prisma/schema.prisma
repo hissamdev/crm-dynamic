@@ -13,37 +13,100 @@ datasource db {
 }
 
 model List {
-  id String @id @default(uuid())
-  name String
-  emoji String?
-  desc String?
+  id        String   @id @default(uuid())
+  name      String
+  emoji     String?
+  desc      String?
   createdAt DateTime @default(now())
-  fields Field[]
-  values Value[]
+  fields    Field[]
+  values    Value[]
 
   @@map("lists")
 }
 
 model Field {
-  id String @id @default(uuid())
-  name String
-  emoji String
-  type String
-  label String?
+  id       String  @id @default(uuid())
+  name     String
+  emoji    String
+  type     String
+  label    String?
   position Int
-  deleted Boolean @default(false)
-  listId String
-  list List @relation(fields: [listId], references: [id], onDelete: Cascade)
+  deleted  Boolean @default(false)
+  listId   String
+  list     List    @relation(fields: [listId], references: [id], onDelete: Cascade)
 
   @@map("fields")
 }
 
 model Value {
-  id Int @id @default(autoincrement())
-  data Json
+  id        Int      @id @default(autoincrement())
+  data      Json
   createdAt DateTime @default(now())
-  listId String
-  list List @relation(fields: [listId], references: [id], onDelete: Cascade)
+  listId    String
+  list      List     @relation(fields: [listId], references: [id], onDelete: Cascade)
 
   @@map("values")
+}
+
+model User {
+  id            String    @id
+  name          String
+  email         String
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
 }
