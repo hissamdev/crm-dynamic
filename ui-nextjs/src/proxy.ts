@@ -7,7 +7,7 @@ export default async function proxy(req: NextRequest) {
         headers: await headers(),
     });
     if (!session) {
-        return NextResponse.redirect(new URL("/sign-in", req.url));
+        return NextResponse.redirect(new URL("/auth/sign-in", req.url));
     }
 
     return NextResponse.next();
