@@ -1,16 +1,12 @@
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-    Field,
-    FieldDescription,
-    FieldGroup,
-    FieldLabel,
-} from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+import { actionLinkSignIn } from "../../actions/server";
 
 export default function SignIn() {
     return (
         <main className="h-screen bg-black font-inter text-white">
-            <form className="mx-auto max-w-100 py-10 px-8 min-h-90 border border-gray-500 rounded-2xl">
+            <form
+                action={actionLinkSignIn}
+                className="mt-50 mx-auto max-w-100 py-10 px-8 min-h-90 border border-gray-500 rounded-2xl"
+            >
                 <fieldset>
                     <label htmlFor="email" className="text-lg">
                         Enter your email
@@ -19,7 +15,8 @@ export default function SignIn() {
                         type="email"
                         id="email"
                         name="email"
-                        placeholder="email@provider.com"
+                        autoComplete="email"
+                        placeholder="e.g. your-email@provider.com"
                         className="mt-2 px-3 py-2 w-full border border-gray-700 rounded-md text-sm"
                     />
                     <p className="mt-2 text-sm font-light leading-tight">
@@ -31,10 +28,10 @@ export default function SignIn() {
                     <input
                         type="checkbox"
                         id="checkbox"
-                        name="checkbox"
+                        name="terms"
+                        value="yes"
                         className="
-                        mt-1
-                        
+                            mt-1
                             cursor-pointer
                         "
                     />
@@ -44,7 +41,10 @@ export default function SignIn() {
                     </label>
                 </fieldset>
 
-                <button className="block mx-auto mt-12 px-4 py-1.5 bg-white hover:bg-white/80 text-black cursor-pointer rounded-md">
+                <button
+                    type="submit"
+                    className="block mx-auto mt-12 px-4 py-1.5 bg-white hover:bg-white/80 text-black cursor-pointer rounded-md"
+                >
                     Submit
                 </button>
             </form>

@@ -11,4 +11,8 @@
 export type * from './models/List'
 export type * from './models/Field'
 export type * from './models/Value'
+export type * from './models/User'
+export type * from './models/Session'
+export type * from './models/Account'
+export type * from './models/Verification'
 export type * from './commonInputTypes'

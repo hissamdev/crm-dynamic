@@ -3,6 +3,34 @@ import { Field } from "../dashboard/create-list/page";
 import { prepareFields } from "@/src/utils/functions/utility";
 import axios, { isAxiosError } from "axios";
 import { fieldSchema, listSchema } from "@/src/utils/types/zodTypes";
+import z from "zod";
+import { auth } from "@/src/lib/auth";
+import { headers } from "next/headers";
+
+const signInSchema = z.object({
+    email: z.email(),
+    terms: z.string("yes"),
+});
+export async function actionLinkSignIn(formData: FormData) {
+    const signInDetails = {
+        email: formData.get("email"),
+        terms: formData.get("terms"),
+    };
+
+    const safeDetails = signInSchema.safeParse(signInDetails);
+    if (!safeDetails.success) {
+        console.error(safeDetails.error.issues);
+        return;
+    }
+
+    const data = await auth.api.signInMagicLink({
+        body: {
+            email: safeDetails.data.email,
+            callbackURL: "/dashboard",
+        },
+        headers: await headers(),
+    });
+}
 
 export async function handleCreateList(fields: Field[], formData: FormData) {
     const listInfo = {
