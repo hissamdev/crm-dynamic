@@ -11,25 +11,45 @@ const signInSchema = z.object({
     email: z.email(),
     terms: z.string("yes"),
 });
-export async function actionLinkSignIn(formData: FormData) {
-    const signInDetails = {
+export async function actionLinkSignIn(initialState: any, formData: FormData) {
+    const safeDetails = signInSchema.safeParse({
         email: formData.get("email"),
         terms: formData.get("terms"),
-    };
+    });
 
-    const safeDetails = signInSchema.safeParse(signInDetails);
     if (!safeDetails.success) {
         console.error(safeDetails.error.issues);
-        return;
+        return {
+            success: false,
+            message: "Failed to validate fields",
+        };
     }
 
-    const data = await auth.api.signInMagicLink({
-        body: {
-            email: safeDetails.data.email,
-            callbackURL: "/dashboard",
-        },
-        headers: await headers(),
-    });
+    try {
+        const data = await auth.api.signInMagicLink({
+            body: {
+                email: safeDetails.data.email,
+                callbackURL: "/dashboard",
+            },
+            headers: await headers(),
+        });
+        if (!data) {
+            return {
+                success: false,
+                message: "Sign in operation failed",
+            };
+        }
+        return {
+            success: true,
+            message: "Sign in operation completed successfully",
+        };
+    } catch (err) {
+        console.error(err);
+        return {
+            success: false,
+            message: "Failed to sign in",
+        };
+    }
 }
 
 export async function handleCreateList(fields: Field[], formData: FormData) {
