@@ -36,18 +36,19 @@ export async function actionLinkSignIn(initialState: any, formData: FormData) {
         if (!data) {
             return {
                 success: false,
-                message: "Sign in operation failed",
+                message: "Failed to submit email",
             };
         }
+        console.log("Data receied:", data);
         return {
             success: true,
-            message: "Sign in operation completed successfully",
+            message: "Email submitted successfully",
         };
     } catch (err) {
         console.error(err);
         return {
             success: false,
-            message: "Failed to sign in",
+            message: "Failed to submit email",
         };
     }
 }

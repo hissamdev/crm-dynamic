@@ -1,3 +1,5 @@
+import * as React from "react";
+
 interface EmailTemplateProps {
     firstName: string;
 }
@@ -5,7 +7,7 @@ interface EmailTemplateProps {
 export function SignInTemplate({ firstName }: EmailTemplateProps) {
     return (
         <div>
-            <h1>Welcome {firstName}</h1>
+            <h1>Welcome, {firstName}!</h1>
         </div>
     );
 }
