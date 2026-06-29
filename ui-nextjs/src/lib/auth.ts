@@ -20,9 +20,11 @@ export const auth = betterAuth({
                         `${process.env.API_URL}/api/send`,
                         {
                             email,
+                            url,
                         },
                     );
-                    if (!res.data.success) {
+                    if (!res.data) {
+                        console.error(res.data);
                         throw new Error("Failed to send sign in email");
                     }
                 } catch (err) {

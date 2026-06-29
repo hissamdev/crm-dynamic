@@ -1,4 +1,4 @@
-import { Field } from "@/src/app/dashboard/create-list/page";
+import { Field } from "@/src/app/lists/create-list/page";
 
 export function prepareFields(fields: Field[]) {
     return fields.map((field, idx) => ({

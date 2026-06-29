@@ -1,5 +1,5 @@
 "use server";
-import { Field } from "../dashboard/create-list/page";
+import { Field } from "../lists/create-list/page";
 import { prepareFields } from "@/src/utils/functions/utility";
 import axios, { isAxiosError } from "axios";
 import { fieldSchema, listSchema } from "@/src/utils/types/zodTypes";
