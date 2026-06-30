@@ -19,6 +19,10 @@ export async function actionRowCreate(fields: Field[], listId: string) {
                 },
             },
         );
+
+        if (!res.data) {
+            return;
+        }
         const created: Value = res.data;
 
         return { created };
@@ -105,9 +109,19 @@ export async function actionColUpdate(
     listId: string,
     value: string,
 ) {
-    const res = await axios.put(`${process.env.API_URL}/api/cols/update`, {
-        listId,
-        fieldId,
-        value,
-    });
+    const headerStore = await headers();
+
+    const res = await axios.put(
+        `${process.env.API_URL}/api/cols/update`,
+        {
+            listId,
+            fieldId,
+            value,
+        },
+        {
+            headers: {
+                cookie: headerStore.get("cookie") ?? "",
+            },
+        },
+    );
 }
