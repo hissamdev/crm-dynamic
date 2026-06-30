@@ -1,19 +1,23 @@
-import axios, { isAxiosError } from "axios";
+import axios from "axios";
 import SidebarLists from "./[slug]/SidebarLists";
 import { auth } from "@/src/lib/auth";
 import { headers } from "next/headers";
 
 export default async function Dashboard() {
+    const headerStore = await headers();
     const session = await auth.api.getSession({
         headers: await headers(),
     });
     try {
         const { data } = await axios.get(
-            `${process.env.API_URL}/api/lists/${session?.user.id}`,
+            `${process.env.API_URL}/api/lists/?id=${session?.user.id}`,
+            {
+                headers: Object.fromEntries(headerStore.entries()),
+            },
         );
 
         return (
-            <div className=" grid grid-cols-[20rem_1fr]">
+            <div className=" grid grid-cols-[20rem_1fr] bg-black">
                 <SidebarLists lists={data} />
             </div>
         );

@@ -8,29 +8,34 @@ export default async function proxy(req: NextRequest) {
         headers: await headers(),
     });
 
-    if (pathname.startsWith("/lists")) {
-        if (!session) {
-            return NextResponse.redirect(new URL("/auth/sign-in", req.url));
-        }
-    }
+    // if (pathname.startsWith("/lists")) {
+    //     if (!session) {
+    //         return NextResponse.redirect(new URL("/auth/sign-in", req.url));
+    //     }
+    // }
 
-    if (pathname.startsWith("/auth")) {
-        if (session) {
-            return NextResponse.redirect(new URL("/lists", req.url));
-        }
-    }
+    // if (pathname.startsWith("/auth")) {
+    //     if (session) {
+    //         return NextResponse.redirect(new URL("/lists", req.url));
+    //     }
+    // }
 
-    if (pathname.startsWith("/api")) {
-        if (!session) {
-            return NextResponse.json(
-                {
-                    success: false,
-                    message: "Unauthorized: User is not authenticated",
-                },
-                { status: 401 },
-            );
-        }
-    }
+    // if (pathname.startsWith("/api")) {
+    //     if (!session) {
+    //         console.log(
+    //             "Unauthorized: User is not authenticated to access API route",
+    //         );
+    //         return NextResponse.json(
+    //             {
+    //                 success: false,
+    //                 message: "Unauthorized: User is not authenticated",
+    //                 data: session,
+    //                 path: pathname,
+    //             },
+    //             { status: 401 },
+    //         );
+    //     }
+    // }
 
     return NextResponse.next();
 }

@@ -35,7 +35,7 @@ export default function SidebarLists({ lists }: { lists: List[] }) {
                     lists.map((list) => (
                         <Link
                             key={list.id}
-                            href={`/dashboard/${list.id}`}
+                            href={`/lists/${list.id}`}
                             className={`block px-4 py-2 w-full text-[15px] font-semibold tracking-wider text-nowrap bg-white/10 hover:bg-white/5 rounded-md`}
                         >
                             {list.emoji}{" "}

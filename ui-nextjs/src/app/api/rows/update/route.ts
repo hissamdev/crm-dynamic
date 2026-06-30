@@ -17,7 +17,7 @@ export async function PUT(req: NextRequest) {
         return NextResponse.json(
             {
                 success: false,
-                message: "Invalid request",
+                message: "Invalid request: Missing fields",
             },
             { status: 400 },
         );
