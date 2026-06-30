@@ -54,6 +54,8 @@ export async function actionLinkSignIn(initialState: any, formData: FormData) {
 }
 
 export async function handleCreateList(fields: Field[], formData: FormData) {
+    const headeStore = await headers();
+
     const listInfo = {
         name: formData.get("list-name"),
         emoji: formData.get("list-emoji"),
@@ -82,9 +84,17 @@ export async function handleCreateList(fields: Field[], formData: FormData) {
     };
 
     try {
-        await axios.post(`${process.env.API_URL}/api/lists/create`, {
-            listWithFields,
-        });
+        await axios.post(
+            `${process.env.API_URL}/api/lists/create`,
+            {
+                listWithFields,
+            },
+            {
+                headers: {
+                    cookie: headeStore.get("cookie") ?? "",
+                },
+            },
+        );
     } catch (err) {
         if (isAxiosError(err)) {
             console.error(err.response?.status);

@@ -107,6 +107,7 @@ export default function ListTable({ slug, list, values }: Props) {
     };
 
     const handleColCreate = async (listId: string) => {
+        console.log("Function for col creation");
         const { created }: { created: Field } = await actionColCreate(
             listId,
             fields.length + 1,
@@ -130,7 +131,7 @@ export default function ListTable({ slug, list, values }: Props) {
         });
     };
 
-    const handleColDelete = (fieldId: string) => {
+    const handleColDelete = async (fieldId: string) => {
         const field = fields.find((field) => field.id === fieldId);
         if (!field) {
             return;

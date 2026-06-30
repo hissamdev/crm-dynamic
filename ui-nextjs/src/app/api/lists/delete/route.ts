@@ -8,7 +8,7 @@ export async function DELETE(req: NextRequest) {
     const listId = req.nextUrl.searchParams.get("listId");
 
     if (!listId) {
-        console.error("Invalid requestl");
+        console.error("Invalid request");
         return NextResponse.json(
             {
                 success: false,

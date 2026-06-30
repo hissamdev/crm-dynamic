@@ -2,6 +2,7 @@ import axios from "axios";
 import SidebarLists from "./[slug]/SidebarLists";
 import { auth } from "@/src/lib/auth";
 import { headers } from "next/headers";
+import { List } from "@/src/utils/types/appTypes";
 
 export default async function Dashboard() {
     const headerStore = await headers();
@@ -9,7 +10,7 @@ export default async function Dashboard() {
         headers: await headers(),
     });
     try {
-        const { data } = await axios.get(
+        const { data }: { data: List[] } = await axios.get(
             `${process.env.API_URL}/api/lists/?id=${session?.user.id}`,
             {
                 headers: Object.fromEntries(headerStore.entries()),
@@ -17,8 +18,11 @@ export default async function Dashboard() {
         );
 
         return (
-            <div className=" grid grid-cols-[20rem_1fr] bg-black">
+            <div className="flex bg-black">
                 <SidebarLists lists={data} />
+                <div className="text-white mx-40 mt-40 text-lg font-inter border border-gray-500 rounded-md px-4 py-4 h-80 w-full">
+                    No lists found
+                </div>
             </div>
         );
     } catch (err) {

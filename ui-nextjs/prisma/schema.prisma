@@ -20,6 +20,8 @@ model List {
   createdAt DateTime @default(now())
   fields    Field[]
   values    Value[]
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("lists")
 }
@@ -58,6 +60,7 @@ model User {
   updatedAt     DateTime  @updatedAt
   sessions      Session[]
   accounts      Account[]
+  lists List[]
 
   @@unique([email])
   @@map("user")

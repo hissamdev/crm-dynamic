@@ -1,7 +1,7 @@
 "use client";
 
 import { List } from "@/src/utils/types/appTypes";
-import { PanelLeft, PlusIcon } from "lucide-react";
+import { ArrowUpRight, PanelLeft, PlusIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -30,7 +30,7 @@ export default function SidebarLists({ lists }: { lists: List[] }) {
             </div>
             <div className="mt-4">
                 {!lists || lists.length === 0 ? (
-                    <div></div>
+                    <div>No Lists Found</div>
                 ) : lists.length > 0 ? (
                     lists.map((list) => (
                         <Link
@@ -47,7 +47,13 @@ export default function SidebarLists({ lists }: { lists: List[] }) {
                         </Link>
                     ))
                 ) : (
-                    <div>Nothing</div>
+                    <Link
+                        href="/lists/create-list"
+                        className="text-white font-inter bg-white/10 hover:bg-white/5 px-4 py-2 rounded-md w-full flex justify-between items-center cursor-pointer text-sm"
+                    >
+                        Create your first list
+                        <ArrowUpRight />
+                    </Link>
                 )}
             </div>
         </aside>

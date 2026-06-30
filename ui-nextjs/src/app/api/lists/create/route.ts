@@ -1,5 +1,7 @@
+import { auth } from "@/src/lib/auth";
 import prisma from "@/src/lib/prisma";
 import { listSchema } from "@/src/utils/types/zodTypes";
+import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
 
@@ -18,6 +20,26 @@ export const listFieldsSchema = listSchema.extend({
 });
 
 export async function POST(req: NextRequest) {
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+
+    const headerStore = await headers();
+    if (!session) {
+        console.log(
+            "------------------------------------------------------------------\n",
+            session,
+            Object.fromEntries(headerStore.entries()),
+        );
+        return NextResponse.json(
+            {
+                success: false,
+                message: "Unauthorized",
+            },
+            { status: 401 },
+        );
+    }
+
     const body = await req.json();
     const safeList = listFieldsSchema.safeParse(body.listWithFields);
     if (!safeList.success) {
@@ -39,6 +61,7 @@ export async function POST(req: NextRequest) {
     try {
         await prisma.list.create({
             data: {
+                userId: session?.user.id,
                 name: safeList.data.name,
                 emoji: safeList.data.emoji,
                 desc: safeList.data.desc,

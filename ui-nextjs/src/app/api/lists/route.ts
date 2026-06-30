@@ -23,7 +23,7 @@ export async function GET() {
                     message: "No lists found",
                     data: [],
                 },
-                { status: 404 },
+                { status: 200 },
             );
         }
 

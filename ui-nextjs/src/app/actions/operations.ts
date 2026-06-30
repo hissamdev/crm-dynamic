@@ -1,6 +1,6 @@
 "use server";
 
-import { Field } from "@/src/utils/types/appTypes";
+import { Field, Value } from "@/src/utils/types/appTypes";
 import axios from "axios";
 import { headers } from "next/headers";
 
@@ -19,7 +19,7 @@ export async function actionRowCreate(fields: Field[], listId: string) {
                 },
             },
         );
-        const created = res.data;
+        const created: Value = res.data;
 
         return { created };
     } catch (err) {
@@ -36,14 +36,9 @@ export async function actionRowCreate(fields: Field[], listId: string) {
 }
 
 export async function actionColCreate(listId: string, position: number) {
+    console.log("Server action for col creation");
     const headerStore = await headers();
     try {
-        console.log(
-            "Server action values\n",
-            typeof listId,
-            "\n",
-            typeof position,
-        );
         const res = await axios.post(
             `${process.env.API_URL}/api/cols/create/`,
             null,

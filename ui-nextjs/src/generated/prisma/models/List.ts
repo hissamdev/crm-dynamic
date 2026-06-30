@@ -30,6 +30,7 @@ export type ListMinAggregateOutputType = {
   emoji: string | null
   desc: string | null
   createdAt: Date | null
+  userId: string | null
 }
 
 export type ListMaxAggregateOutputType = {
@@ -38,6 +39,7 @@ export type ListMaxAggregateOutputType = {
   emoji: string | null
   desc: string | null
   createdAt: Date | null
+  userId: string | null
 }
 
 export type ListCountAggregateOutputType = {
@@ -46,6 +48,7 @@ export type ListCountAggregateOutputType = {
   emoji: number
   desc: number
   createdAt: number
+  userId: number
   _all: number
 }
 
@@ -56,6 +59,7 @@ export type ListMinAggregateInputType = {
   emoji?: true
   desc?: true
   createdAt?: true
+  userId?: true
 }
 
 export type ListMaxAggregateInputType = {
@@ -64,6 +68,7 @@ export type ListMaxAggregateInputType = {
   emoji?: true
   desc?: true
   createdAt?: true
+  userId?: true
 }
 
 export type ListCountAggregateInputType = {
@@ -72,6 +77,7 @@ export type ListCountAggregateInputType = {
   emoji?: true
   desc?: true
   createdAt?: true
+  userId?: true
   _all?: true
 }
 
@@ -153,6 +159,7 @@ export type ListGroupByOutputType = {
   emoji: string | null
   desc: string | null
   createdAt: Date
+  userId: string
   _count: ListCountAggregateOutputType | null
   _min: ListMinAggregateOutputType | null
   _max: ListMaxAggregateOutputType | null
@@ -182,8 +189,10 @@ export type ListWhereInput = {
   emoji?: Prisma.StringNullableFilter<"List"> | string | null
   desc?: Prisma.StringNullableFilter<"List"> | string | null
   createdAt?: Prisma.DateTimeFilter<"List"> | Date | string
+  userId?: Prisma.StringFilter<"List"> | string
   fields?: Prisma.FieldListRelationFilter
   values?: Prisma.ValueListRelationFilter
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type ListOrderByWithRelationInput = {
@@ -192,8 +201,10 @@ export type ListOrderByWithRelationInput = {
   emoji?: Prisma.SortOrderInput | Prisma.SortOrder
   desc?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   fields?: Prisma.FieldOrderByRelationAggregateInput
   values?: Prisma.ValueOrderByRelationAggregateInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type ListWhereUniqueInput = Prisma.AtLeast<{
@@ -205,8 +216,10 @@ export type ListWhereUniqueInput = Prisma.AtLeast<{
   emoji?: Prisma.StringNullableFilter<"List"> | string | null
   desc?: Prisma.StringNullableFilter<"List"> | string | null
   createdAt?: Prisma.DateTimeFilter<"List"> | Date | string
+  userId?: Prisma.StringFilter<"List"> | string
   fields?: Prisma.FieldListRelationFilter
   values?: Prisma.ValueListRelationFilter
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
 export type ListOrderByWithAggregationInput = {
@@ -215,6 +228,7 @@ export type ListOrderByWithAggregationInput = {
   emoji?: Prisma.SortOrderInput | Prisma.SortOrder
   desc?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   _count?: Prisma.ListCountOrderByAggregateInput
   _max?: Prisma.ListMaxOrderByAggregateInput
   _min?: Prisma.ListMinOrderByAggregateInput
@@ -229,6 +243,7 @@ export type ListScalarWhereWithAggregatesInput = {
   emoji?: Prisma.StringNullableWithAggregatesFilter<"List"> | string | null
   desc?: Prisma.StringNullableWithAggregatesFilter<"List"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"List"> | Date | string
+  userId?: Prisma.StringWithAggregatesFilter<"List"> | string
 }
 
 export type ListCreateInput = {
@@ -239,6 +254,7 @@ export type ListCreateInput = {
   createdAt?: Date | string
   fields?: Prisma.FieldCreateNestedManyWithoutListInput
   values?: Prisma.ValueCreateNestedManyWithoutListInput
+  user: Prisma.UserCreateNestedOneWithoutListsInput
 }
 
 export type ListUncheckedCreateInput = {
@@ -247,6 +263,7 @@ export type ListUncheckedCreateInput = {
   emoji?: string | null
   desc?: string | null
   createdAt?: Date | string
+  userId: string
   fields?: Prisma.FieldUncheckedCreateNestedManyWithoutListInput
   values?: Prisma.ValueUncheckedCreateNestedManyWithoutListInput
 }
@@ -259,6 +276,7 @@ export type ListUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fields?: Prisma.FieldUpdateManyWithoutListNestedInput
   values?: Prisma.ValueUpdateManyWithoutListNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutListsNestedInput
 }
 
 export type ListUncheckedUpdateInput = {
@@ -267,6 +285,7 @@ export type ListUncheckedUpdateInput = {
   emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   fields?: Prisma.FieldUncheckedUpdateManyWithoutListNestedInput
   values?: Prisma.ValueUncheckedUpdateManyWithoutListNestedInput
 }
@@ -277,6 +296,7 @@ export type ListCreateManyInput = {
   emoji?: string | null
   desc?: string | null
   createdAt?: Date | string
+  userId: string
 }
 
 export type ListUpdateManyMutationInput = {
@@ -293,6 +313,7 @@ export type ListUncheckedUpdateManyInput = {
   emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ListCountOrderByAggregateInput = {
@@ -301,6 +322,7 @@ export type ListCountOrderByAggregateInput = {
   emoji?: Prisma.SortOrder
   desc?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type ListMaxOrderByAggregateInput = {
@@ -309,6 +331,7 @@ export type ListMaxOrderByAggregateInput = {
   emoji?: Prisma.SortOrder
   desc?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type ListMinOrderByAggregateInput = {
@@ -317,11 +340,22 @@ export type ListMinOrderByAggregateInput = {
   emoji?: Prisma.SortOrder
   desc?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type ListScalarRelationFilter = {
   is?: Prisma.ListWhereInput
   isNot?: Prisma.ListWhereInput
+}
+
+export type ListListRelationFilter = {
+  every?: Prisma.ListWhereInput
+  some?: Prisma.ListWhereInput
+  none?: Prisma.ListWhereInput
+}
+
+export type ListOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -364,6 +398,48 @@ export type ListUpdateOneRequiredWithoutValuesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ListUpdateToOneWithWhereWithoutValuesInput, Prisma.ListUpdateWithoutValuesInput>, Prisma.ListUncheckedUpdateWithoutValuesInput>
 }
 
+export type ListCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.ListCreateWithoutUserInput, Prisma.ListUncheckedCreateWithoutUserInput> | Prisma.ListCreateWithoutUserInput[] | Prisma.ListUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ListCreateOrConnectWithoutUserInput | Prisma.ListCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.ListCreateManyUserInputEnvelope
+  connect?: Prisma.ListWhereUniqueInput | Prisma.ListWhereUniqueInput[]
+}
+
+export type ListUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.ListCreateWithoutUserInput, Prisma.ListUncheckedCreateWithoutUserInput> | Prisma.ListCreateWithoutUserInput[] | Prisma.ListUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ListCreateOrConnectWithoutUserInput | Prisma.ListCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.ListCreateManyUserInputEnvelope
+  connect?: Prisma.ListWhereUniqueInput | Prisma.ListWhereUniqueInput[]
+}
+
+export type ListUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.ListCreateWithoutUserInput, Prisma.ListUncheckedCreateWithoutUserInput> | Prisma.ListCreateWithoutUserInput[] | Prisma.ListUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ListCreateOrConnectWithoutUserInput | Prisma.ListCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.ListUpsertWithWhereUniqueWithoutUserInput | Prisma.ListUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.ListCreateManyUserInputEnvelope
+  set?: Prisma.ListWhereUniqueInput | Prisma.ListWhereUniqueInput[]
+  disconnect?: Prisma.ListWhereUniqueInput | Prisma.ListWhereUniqueInput[]
+  delete?: Prisma.ListWhereUniqueInput | Prisma.ListWhereUniqueInput[]
+  connect?: Prisma.ListWhereUniqueInput | Prisma.ListWhereUniqueInput[]
+  update?: Prisma.ListUpdateWithWhereUniqueWithoutUserInput | Prisma.ListUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.ListUpdateManyWithWhereWithoutUserInput | Prisma.ListUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.ListScalarWhereInput | Prisma.ListScalarWhereInput[]
+}
+
+export type ListUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.ListCreateWithoutUserInput, Prisma.ListUncheckedCreateWithoutUserInput> | Prisma.ListCreateWithoutUserInput[] | Prisma.ListUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ListCreateOrConnectWithoutUserInput | Prisma.ListCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.ListUpsertWithWhereUniqueWithoutUserInput | Prisma.ListUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.ListCreateManyUserInputEnvelope
+  set?: Prisma.ListWhereUniqueInput | Prisma.ListWhereUniqueInput[]
+  disconnect?: Prisma.ListWhereUniqueInput | Prisma.ListWhereUniqueInput[]
+  delete?: Prisma.ListWhereUniqueInput | Prisma.ListWhereUniqueInput[]
+  connect?: Prisma.ListWhereUniqueInput | Prisma.ListWhereUniqueInput[]
+  update?: Prisma.ListUpdateWithWhereUniqueWithoutUserInput | Prisma.ListUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.ListUpdateManyWithWhereWithoutUserInput | Prisma.ListUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.ListScalarWhereInput | Prisma.ListScalarWhereInput[]
+}
+
 export type ListCreateWithoutFieldsInput = {
   id?: string
   name: string
@@ -371,6 +447,7 @@ export type ListCreateWithoutFieldsInput = {
   desc?: string | null
   createdAt?: Date | string
   values?: Prisma.ValueCreateNestedManyWithoutListInput
+  user: Prisma.UserCreateNestedOneWithoutListsInput
 }
 
 export type ListUncheckedCreateWithoutFieldsInput = {
@@ -379,6 +456,7 @@ export type ListUncheckedCreateWithoutFieldsInput = {
   emoji?: string | null
   desc?: string | null
   createdAt?: Date | string
+  userId: string
   values?: Prisma.ValueUncheckedCreateNestedManyWithoutListInput
 }
 
@@ -405,6 +483,7 @@ export type ListUpdateWithoutFieldsInput = {
   desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   values?: Prisma.ValueUpdateManyWithoutListNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutListsNestedInput
 }
 
 export type ListUncheckedUpdateWithoutFieldsInput = {
@@ -413,6 +492,7 @@ export type ListUncheckedUpdateWithoutFieldsInput = {
   emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   values?: Prisma.ValueUncheckedUpdateManyWithoutListNestedInput
 }
 
@@ -423,6 +503,7 @@ export type ListCreateWithoutValuesInput = {
   desc?: string | null
   createdAt?: Date | string
   fields?: Prisma.FieldCreateNestedManyWithoutListInput
+  user: Prisma.UserCreateNestedOneWithoutListsInput
 }
 
 export type ListUncheckedCreateWithoutValuesInput = {
@@ -431,6 +512,7 @@ export type ListUncheckedCreateWithoutValuesInput = {
   emoji?: string | null
   desc?: string | null
   createdAt?: Date | string
+  userId: string
   fields?: Prisma.FieldUncheckedCreateNestedManyWithoutListInput
 }
 
@@ -457,6 +539,7 @@ export type ListUpdateWithoutValuesInput = {
   desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fields?: Prisma.FieldUpdateManyWithoutListNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutListsNestedInput
 }
 
 export type ListUncheckedUpdateWithoutValuesInput = {
@@ -465,7 +548,102 @@ export type ListUncheckedUpdateWithoutValuesInput = {
   emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   fields?: Prisma.FieldUncheckedUpdateManyWithoutListNestedInput
+}
+
+export type ListCreateWithoutUserInput = {
+  id?: string
+  name: string
+  emoji?: string | null
+  desc?: string | null
+  createdAt?: Date | string
+  fields?: Prisma.FieldCreateNestedManyWithoutListInput
+  values?: Prisma.ValueCreateNestedManyWithoutListInput
+}
+
+export type ListUncheckedCreateWithoutUserInput = {
+  id?: string
+  name: string
+  emoji?: string | null
+  desc?: string | null
+  createdAt?: Date | string
+  fields?: Prisma.FieldUncheckedCreateNestedManyWithoutListInput
+  values?: Prisma.ValueUncheckedCreateNestedManyWithoutListInput
+}
+
+export type ListCreateOrConnectWithoutUserInput = {
+  where: Prisma.ListWhereUniqueInput
+  create: Prisma.XOR<Prisma.ListCreateWithoutUserInput, Prisma.ListUncheckedCreateWithoutUserInput>
+}
+
+export type ListCreateManyUserInputEnvelope = {
+  data: Prisma.ListCreateManyUserInput | Prisma.ListCreateManyUserInput[]
+  skipDuplicates?: boolean
+}
+
+export type ListUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.ListWhereUniqueInput
+  update: Prisma.XOR<Prisma.ListUpdateWithoutUserInput, Prisma.ListUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.ListCreateWithoutUserInput, Prisma.ListUncheckedCreateWithoutUserInput>
+}
+
+export type ListUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.ListWhereUniqueInput
+  data: Prisma.XOR<Prisma.ListUpdateWithoutUserInput, Prisma.ListUncheckedUpdateWithoutUserInput>
+}
+
+export type ListUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.ListScalarWhereInput
+  data: Prisma.XOR<Prisma.ListUpdateManyMutationInput, Prisma.ListUncheckedUpdateManyWithoutUserInput>
+}
+
+export type ListScalarWhereInput = {
+  AND?: Prisma.ListScalarWhereInput | Prisma.ListScalarWhereInput[]
+  OR?: Prisma.ListScalarWhereInput[]
+  NOT?: Prisma.ListScalarWhereInput | Prisma.ListScalarWhereInput[]
+  id?: Prisma.StringFilter<"List"> | string
+  name?: Prisma.StringFilter<"List"> | string
+  emoji?: Prisma.StringNullableFilter<"List"> | string | null
+  desc?: Prisma.StringNullableFilter<"List"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"List"> | Date | string
+  userId?: Prisma.StringFilter<"List"> | string
+}
+
+export type ListCreateManyUserInput = {
+  id?: string
+  name: string
+  emoji?: string | null
+  desc?: string | null
+  createdAt?: Date | string
+}
+
+export type ListUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fields?: Prisma.FieldUpdateManyWithoutListNestedInput
+  values?: Prisma.ValueUpdateManyWithoutListNestedInput
+}
+
+export type ListUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fields?: Prisma.FieldUncheckedUpdateManyWithoutListNestedInput
+  values?: Prisma.ValueUncheckedUpdateManyWithoutListNestedInput
+}
+
+export type ListUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  emoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  desc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -514,8 +692,10 @@ export type ListSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   emoji?: boolean
   desc?: boolean
   createdAt?: boolean
+  userId?: boolean
   fields?: boolean | Prisma.List$fieldsArgs<ExtArgs>
   values?: boolean | Prisma.List$valuesArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ListCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["list"]>
 
@@ -525,6 +705,8 @@ export type ListSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   emoji?: boolean
   desc?: boolean
   createdAt?: boolean
+  userId?: boolean
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["list"]>
 
 export type ListSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -533,6 +715,8 @@ export type ListSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   emoji?: boolean
   desc?: boolean
   createdAt?: boolean
+  userId?: boolean
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["list"]>
 
 export type ListSelectScalar = {
@@ -541,22 +725,29 @@ export type ListSelectScalar = {
   emoji?: boolean
   desc?: boolean
   createdAt?: boolean
+  userId?: boolean
 }
 
-export type ListOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "emoji" | "desc" | "createdAt", ExtArgs["result"]["list"]>
+export type ListOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "emoji" | "desc" | "createdAt" | "userId", ExtArgs["result"]["list"]>
 export type ListInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   fields?: boolean | Prisma.List$fieldsArgs<ExtArgs>
   values?: boolean | Prisma.List$valuesArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ListCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type ListIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type ListIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type ListIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
+export type ListIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
 
 export type $ListPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "List"
   objects: {
     fields: Prisma.$FieldPayload<ExtArgs>[]
     values: Prisma.$ValuePayload<ExtArgs>[]
+    user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -564,6 +755,7 @@ export type $ListPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     emoji: string | null
     desc: string | null
     createdAt: Date
+    userId: string
   }, ExtArgs["result"]["list"]>
   composites: {}
 }
@@ -960,6 +1152,7 @@ export interface Prisma__ListClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   fields<T extends Prisma.List$fieldsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.List$fieldsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   values<T extends Prisma.List$valuesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.List$valuesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ValuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -994,6 +1187,7 @@ export interface ListFieldRefs {
   readonly emoji: Prisma.FieldRef<"List", 'String'>
   readonly desc: Prisma.FieldRef<"List", 'String'>
   readonly createdAt: Prisma.FieldRef<"List", 'DateTime'>
+  readonly userId: Prisma.FieldRef<"List", 'String'>
 }
     
 
@@ -1248,6 +1442,10 @@ export type ListCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    */
   data: Prisma.ListCreateManyInput | Prisma.ListCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ListIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1318,6 +1516,10 @@ export type ListUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many Lists to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ListIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

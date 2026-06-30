@@ -972,7 +972,8 @@ export const ListScalarFieldEnum = {
   name: 'name',
   emoji: 'emoji',
   desc: 'desc',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  userId: 'userId'
 } as const
 
 export type ListScalarFieldEnum = (typeof ListScalarFieldEnum)[keyof typeof ListScalarFieldEnum]

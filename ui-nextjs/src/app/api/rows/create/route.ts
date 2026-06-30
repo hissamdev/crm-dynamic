@@ -22,6 +22,7 @@ export async function POST(req: Request) {
 
     const safeListId = schema.safeParse(listId);
     if (!safeListId.success) {
+        console.error("Failed to validate listId");
         return NextResponse.json(
             {
                 success: false,
@@ -33,6 +34,7 @@ export async function POST(req: Request) {
     }
     const safeFields = fieldApiSchema.safeParse(fields);
     if (!safeFields.success) {
+        console.error("Failed to validate fields");
         return NextResponse.json(
             {
                 success: false,
