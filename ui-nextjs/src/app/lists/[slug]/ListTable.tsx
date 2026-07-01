@@ -76,7 +76,7 @@ export default function ListTable({ slug, list, values }: Props) {
                         <span>{loading ? "Saving" : "Saved"}</span>
                     </div>
                 </div>
-                <div className="overflow-x-auto scrollbar-none">
+                <div className="overflow-x-auto scrollbar-none p-2">
                     <table>
                         <FieldCells
                             fields={fields}

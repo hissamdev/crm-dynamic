@@ -10,7 +10,7 @@ export default function SidebarLists({ lists }: { lists: List[] }) {
 
     return (
         <aside
-            className={`px-8 py-12 sticky top-0 h-screen border-r border-r-white/25 transition-all duration-300 ${showSidebar ? "w-100" : "w-10"}`}
+            className={`px-8 py-12 sticky top-0 h-screen border-r border-r-white/25 transition-all duration-300 flex-0 ${showSidebar ? "w-100" : "w-10"}`}
         >
             <div className="absolute top-5 -right-12">
                 <button onClick={() => setShowSidebar((prev) => !prev)}>

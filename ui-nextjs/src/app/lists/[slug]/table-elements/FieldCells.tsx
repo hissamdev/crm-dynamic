@@ -60,17 +60,37 @@ export default function FieldCells({
             );
         });
     };
+
+    const handleEmojiChange = (fieldId: string, newEmoji: string) => {
+        setFields((prev) =>
+            prev.map((field) =>
+                field.id === fieldId
+                    ? {
+                          ...field,
+                          emoji: newEmoji,
+                      }
+                    : field,
+            ),
+        );
+    };
+
     return (
         <thead>
-            <tr className="border border-gray-700">
+            <tr className="border-">
                 {fields
                     .filter((field) => !field.deleted)
                     .map((field) => (
-                        <th key={field.id}>
-                            <div className="min-w-52 text-left border-l border-gray-700 flex">
+                        <th key={field.id} className="border p-2">
+                            <div className="min-w-52 text-left border-gray-700 flex items-center justify-start gap-2">
                                 <input
+                                    onChange={(e) =>
+                                        handleEmojiChange(
+                                            field.id,
+                                            e.target.value,
+                                        )
+                                    }
                                     value={field.emoji || ""}
-                                    className="border"
+                                    className="w-7 aspect-square text-center cursor-pointer bg-white/10 rounded-xs"
                                 />
                                 <input
                                     onChange={(e) =>

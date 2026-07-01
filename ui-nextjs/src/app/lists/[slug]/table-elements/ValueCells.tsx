@@ -66,7 +66,7 @@ export default function ValueCells({
                               .map((field) => (
                                   <td
                                       key={field.id}
-                                      className="min-w-52 text-left border border-gray-700"
+                                      className="min-w-52 text-left border"
                                   >
                                       <input
                                           onChange={(e) =>
