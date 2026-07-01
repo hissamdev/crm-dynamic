@@ -3,15 +3,11 @@ import { Field } from "@/src/utils/types/appTypes";
 import { NextResponse } from "next/server";
 import z from "zod";
 
-const schema = z.string();
+const listIdSchema = z.string();
 const fieldApiSchema = z.array(
     z.object({
         id: z.string(),
-        name: z
-            .string()
-            .min(1, "Field name should be at least 1 character")
-            .max(250, "Field name should be within 250 characters"),
-        label: z.string(),
+        name: z.string(),
     }),
 );
 
@@ -20,7 +16,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { listId, fields }: { listId: string; fields: Field[] } = body;
 
-    const safeListId = schema.safeParse(listId);
+    const safeListId = listIdSchema.safeParse(listId);
     if (!safeListId.success) {
         console.error("Failed to validate listId");
         return NextResponse.json(
@@ -46,6 +42,7 @@ export async function POST(req: Request) {
     }
 
     try {
+        // Convert field objects into uuid: ""
         const readyFields = Object.fromEntries(
             safeFields.data.map((field) => [[field.id], ""]),
         );

@@ -7,7 +7,7 @@ import { headers } from "next/headers";
 export async function actionRowCreate(fields: Field[], listId: string) {
     const headerStore = await headers();
     try {
-        const res = await axios.post(
+        const { data } = await axios.post(
             `${process.env.API_URL}/api/rows/create`,
             {
                 listId,
@@ -20,12 +20,10 @@ export async function actionRowCreate(fields: Field[], listId: string) {
             },
         );
 
-        if (!res.data) {
-            return;
-        }
-        const created: Value = res.data;
+        if (!data) return;
+        const created: Value = data;
 
-        return { created };
+        return created;
     } catch (err) {
         if (axios.isAxiosError(err)) {
             console.log(err.config?.url);
@@ -36,6 +34,7 @@ export async function actionRowCreate(fields: Field[], listId: string) {
         } else {
             console.error(err);
         }
+        return;
     }
 }
 
@@ -43,7 +42,7 @@ export async function actionColCreate(listId: string, position: number) {
     console.log("Server action for col creation");
     const headerStore = await headers();
     try {
-        const res = await axios.post(
+        const { data } = await axios.post(
             `${process.env.API_URL}/api/cols/create/`,
             null,
             {
@@ -56,9 +55,11 @@ export async function actionColCreate(listId: string, position: number) {
                 },
             },
         );
-        const created: Field = res.data;
 
-        return { created };
+        if (!data) return;
+
+        const created: Field = data;
+        return created;
     } catch (err) {
         if (axios.isAxiosError(err)) {
             console.log(err.config?.url);
@@ -69,6 +70,7 @@ export async function actionColCreate(listId: string, position: number) {
         } else {
             console.error(err);
         }
+        return;
     }
 }
 

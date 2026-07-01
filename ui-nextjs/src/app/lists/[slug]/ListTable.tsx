@@ -88,11 +88,8 @@ export default function ListTable({ slug, list, values }: Props) {
     };
 
     const handleRowCreate = async (fields: Field[]) => {
-        const { created }: { created: Value } = await actionRowCreate(
-            fields,
-            slug,
-        );
-        if (!created.id) {
+        const created = await actionRowCreate(fields, slug);
+        if (!created?.id) {
             return console.error("Failed to create row");
         }
 
@@ -108,11 +105,8 @@ export default function ListTable({ slug, list, values }: Props) {
 
     const handleColCreate = async (listId: string) => {
         console.log("Function for col creation");
-        const { created }: { created: Field } = await actionColCreate(
-            listId,
-            fields.length + 1,
-        );
-        if (!created.id) {
+        const created = await actionColCreate(listId, fields.length + 1);
+        if (!created?.id) {
             console.error("Failed to create column");
             return;
         }
